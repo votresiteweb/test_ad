@@ -30,8 +30,17 @@
             url('fond.jpg'); 
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            /* Par défaut sur mobile, on met un défilement normal pour éviter le bug iOS */
+            background-attachment: scroll; 
         }
+        
+        /* Dès qu'on est sur une tablette ou un ordinateur (plus de 768px de large), on remet le bel effet parallaxe */
+        @media (min-width: 768px) {
+            .hero-bg {
+                background-attachment: fixed;
+            }
+        }
+
         .card-zoom:hover img { transform: scale(1.05); }
         .card-zoom img { transition: transform 0.5s ease; }
         
@@ -91,7 +100,7 @@
         </div>
     </div>
 
-    <nav class="bg-white sticky top-0 z-50 shadow-lg border-b border-gray-200">
+    <nav class="bg-white sticky top-0 z-50 shadow-lg border-b border-gray-200 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-24 items-center">
                 <div class="flex items-center cursor-pointer group" onclick="window.scrollTo(0,0)">
@@ -103,7 +112,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex items-center gap-6">
+                
+                <div class="flex items-center gap-4 md:gap-6">
                     <div class="hidden md:flex space-x-8 items-center">
                         <a href="#machines" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_kit">LE KIT</a>
                         <a href="#comparaison" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_comp">AVANTAGES</a>
@@ -113,11 +123,26 @@
                             CONTACT
                         </a>
                     </div>
-                    <div class="flex items-center gap-2 border-l pl-4 border-gray-200">
-                        <button onclick="setLanguage('fr')" id="btn-fr" class="lang-btn active" title="Français"><span class="text-2xl">🇫🇷</span></button>
-                        <button onclick="setLanguage('ca')" id="btn-ca" class="lang-btn" title="Català"><span class="text-2xl">🇦🇩</span></button>
+                    
+                    <div class="flex items-center gap-2 md:border-l md:pl-4 border-gray-200">
+                        <button onclick="setLanguage('fr')" id="btn-fr" class="lang-btn" title="Français"><span class="text-2xl">🇫🇷</span></button>
+                        <button onclick="setLanguage('ca')" id="btn-ca" class="lang-btn active" title="Català"><span class="text-2xl">🇦🇩</span></button>
                     </div>
+
+                    <button id="mobile-menu-btn" class="md:hidden text-smgp-dark focus:outline-none ml-2 p-2" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-3xl"></i>
+                    </button>
                 </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 absolute w-full left-0 shadow-2xl z-40">
+            <div class="px-4 pt-2 pb-6 flex flex-col space-y-2">
+                <a href="#machines" class="block px-4 py-3 rounded-lg text-sm font-bold text-gray-700 hover:text-smgp-orange hover:bg-gray-50 uppercase border-b border-gray-100" data-i18n="nav_kit" onclick="toggleMobileMenu()">LE KIT</a>
+                <a href="#comparaison" class="block px-4 py-3 rounded-lg text-sm font-bold text-gray-700 hover:text-smgp-orange hover:bg-gray-50 uppercase border-b border-gray-100" data-i18n="nav_comp" onclick="toggleMobileMenu()">AVANTAGES</a>
+                <a href="#parts" class="block px-4 py-3 rounded-lg text-sm font-bold text-gray-700 hover:text-smgp-orange hover:bg-gray-50 uppercase border-b border-gray-100" data-i18n="nav_parts" onclick="toggleMobileMenu()">PIÈCES & EPI</a>
+                <a href="#formation" class="block px-4 py-3 rounded-lg text-sm font-bold text-gray-700 hover:text-smgp-orange hover:bg-gray-50 uppercase border-b border-gray-100" data-i18n="nav_formation" onclick="toggleMobileMenu()">FORMATION</a>
+                <a href="#contact" class="block px-4 py-4 mt-2 rounded-lg text-sm font-bold text-white bg-smgp-dark hover:bg-smgp-orange text-center uppercase shadow-md" data-i18n="nav_contact" onclick="toggleMobileMenu()">CONTACT</a>
             </div>
         </div>
     </nav>
@@ -415,7 +440,8 @@
             }
         };
 
-        let currentLang = 'fr';
+        // On définit le catalan comme langue par défaut au chargement
+        let currentLang = 'ca';
 
         function setLanguage(lang) {
             currentLang = lang;
@@ -429,6 +455,22 @@
             
             // Met à jour le carrousel avec la bonne langue
             renderCarousel();
+        }
+
+        // --- GESTION DU MENU MOBILE ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.querySelector('#mobile-menu-btn i');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         }
 
         // --- 2. DONNEES ---
@@ -504,15 +546,6 @@
                     </div>
                 `;
             });
-        }
-        
-        // Initialisation du carrousel au chargement de la page
-        renderCarousel();
-
-        function scrollCarousel(direction) {
-            const container = document.getElementById('parts-carousel');
-            const scrollAmount = 300; 
-            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
         }
 
         // --- 4. LOGIQUE MODAL UNIFIEE ---
@@ -644,6 +677,10 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === "Escape") closeModal();
         });
+
+        // --- 5. INITIALISATION DE LA PAGE ---
+        // On force la traduction en catalan dès le chargement de la page
+        setLanguage('ca');
     </script>
 </body>
 </html>
