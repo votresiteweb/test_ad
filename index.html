@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMGP | Distributeur Officiel OSEOKIT Andorre</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'smgp-dark': '#0f172a',
+                        'smgp-orange': '#f97316',
+                        'smgp-light': '#f1f5f9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.8)), 
+            url('fond.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .card-zoom:hover img { transform: scale(1.05); }
+        .card-zoom img { transition: transform 0.5s ease; }
+        
+        /* MODIFICATION ICI : Suppression du filtre grayscale pour avoir les couleurs */
+        .lang-btn { opacity: 0.7; transition: all 0.3s; } 
+        .lang-btn.active { opacity: 1; transform: scale(1.1); }
+        .lang-btn:hover { opacity: 1; }
+        
+        /* Curseur pointer pour les pièces cliquables */
+        .clickable-card { cursor: pointer; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-slate-800">
+
+    <div id="product-modal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true">
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-90 transition-opacity backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-5xl border-t-4 border-smgp-orange">
+                    <div class="absolute right-0 top-0 pr-4 pt-4 z-20">
+                        <button type="button" onclick="closeModal()" class="rounded-full bg-white/80 p-2 text-gray-800 hover:text-red-600 transition">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-col md:flex-row h-full">
+                        <div class="md:w-1/2 bg-gray-100 relative h-64 md:h-auto group flex items-center justify-center">
+                            <img id="modal-img" src="" alt="" class="max-w-full max-h-full object-contain p-4 mix-blend-multiply">
+                        </div>
+                        <div class="md:w-1/2 p-8 flex flex-col justify-between bg-white">
+                            <div>
+                                <span id="modal-tag" class="inline-flex items-center rounded px-3 py-1 text-xs font-bold uppercase tracking-wider mb-4 bg-gray-200 text-gray-800">TAG</span>
+                                <h3 class="text-3xl font-black leading-6 text-smgp-dark uppercase mb-2" id="modal-title">TITRE</h3>
+                                <p class="text-smgp-orange font-bold text-lg mb-6" id="modal-ref">Réf: -</p>
+                                
+                                <div id="modal-specs-container" class="bg-slate-50 p-4 rounded-lg border border-slate-200 mb-6">
+                                    <h5 class="text-xs font-bold text-smgp-dark uppercase mb-3 border-b pb-2" data-i18n="specs_title">Caractéristiques Clés</h5>
+                                    <ul class="space-y-3 text-sm text-gray-700">
+                                        <li class="flex justify-between"><span><i class="fas fa-info-circle text-smgp-orange w-6"></i> <span id="label-1">-</span>:</span> <span class="font-bold" id="modal-spec1">-</span></li>
+                                        <li class="flex justify-between"><span><i class="fas fa-check text-smgp-orange w-6"></i> <span id="label-2">-</span>:</span> <span class="font-bold" id="modal-spec2">-</span></li>
+                                        <li class="flex justify-between hidden" id="spec-row-3"><span><i class="fas fa-star text-smgp-orange w-6"></i> <span id="label-3">-</span>:</span> <span class="font-bold" id="modal-spec3">-</span></li>
+                                        <li class="flex justify-between hidden" id="spec-row-4"><span><i class="fas fa-certificate text-smgp-orange w-6"></i> <span id="label-4">-</span>:</span> <span class="font-bold" id="modal-spec4">-</span></li>
+                                    </ul>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed" id="modal-desc">Description...</p>
+                            </div>
+                            <div class="mt-8">
+                                <button onclick="scrollToContact()" class="w-full bg-smgp-dark text-white px-4 py-4 rounded hover:bg-smgp-orange transition font-bold shadow-lg flex items-center justify-center gap-2 group uppercase tracking-widest">
+                                    <span data-i18n="modal_btn">Obtenir un devis</span>
+                                    <i class="fas fa-file-invoice-dollar group-hover:translate-x-1 transition"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bg-white sticky top-0 z-50 shadow-lg border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24 items-center">
+                <div class="flex items-center cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <div class="text-3xl font-extrabold text-smgp-dark tracking-tighter border-2 border-smgp-dark p-1 px-2 group-hover:bg-smgp-dark group-hover:text-white transition">SMGP</div>
+                    <div class="ml-3 leading-tight hidden sm:block">
+                        <div class="text-xs font-bold text-smgp-dark tracking-widest uppercase" data-i18n="nav_distributor">DISTRIBUTEUR</div>
+                        <div class="text-xs font-bold text-smgp-orange tracking-widest uppercase flex items-center gap-1">
+                            <span data-i18n="nav_country">ANDORRE</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden md:flex space-x-8 items-center">
+                        <a href="#machines" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_kit">Le Kit</a>
+                        <a href="#demo" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_video">Vidéos</a>
+                        <a href="#parts" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_parts">Pièces</a>
+                        <a href="#contact" class="bg-smgp-dark text-white px-6 py-3 rounded font-bold hover:bg-smgp-orange transition shadow-md text-sm" data-i18n="nav_contact">
+                            CONTACT
+                        </a>
+                    </div>
+                    <div class="flex items-center gap-2 border-l pl-4 border-gray-200">
+                        <button onclick="setLanguage('fr')" id="btn-fr" class="lang-btn active" title="Français"><span class="text-2xl">🇫🇷</span></button>
+                        <button onclick="setLanguage('ca')" id="btn-ca" class="lang-btn" title="Català"><span class="text-2xl">🇦🇩</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-[85vh] flex items-center justify-center overflow-hidden hero-bg">
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+            <div class="mb-8 flex justify-center">
+                <span class="inline-flex items-center gap-2 text-xs font-bold text-white bg-black/50 px-4 py-2 rounded-full backdrop-blur-md border border-white/20 uppercase tracking-widest shadow-xl">
+                    <img src="https://flagcdn.com/w20/ad.png" class="h-3 rounded-sm" alt="Drapeau Andorre">
+                    <span data-i18n="hero_badge">Distributeur Officiel • Principauté d'Andorre</span>
+                </span>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-black text-white mb-4 tracking-tighter drop-shadow-2xl uppercase leading-tight">OSEOKIT PRO</h1>
+            <h2 class="text-4xl md:text-6xl font-black text-smgp-orange mb-8 tracking-tighter drop-shadow-2xl uppercase" data-i18n="hero_subtitle">RAPIDE. EFFICACE.</h2>
+            <div class="inline-block bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-white/10 mb-10 max-w-3xl">
+                <p class="text-lg md:text-xl font-medium text-white leading-relaxed" data-i18n="hero_desc">Isolez 25 m² en 20 minutes. Le système complet machine + isolant pour les professionnels du bâtiment.</p>
+            </div>
+            <div class="flex justify-center">
+                <a href="#machines" class="bg-white text-smgp-dark px-10 py-4 rounded font-extrabold text-sm tracking-widest hover:bg-smgp-orange hover:text-white transition shadow-2xl transform hover:scale-105 uppercase border-2 border-white" data-i18n="hero_btn">Découvrir le système</a>
+            </div>
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/70 animate-bounce"><i class="fas fa-chevron-down text-3xl"></i></div>
+        </div>
+    </header>
+
+    <section id="machines" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-smgp-orange font-bold tracking-widest text-sm uppercase" data-i18n="sec_machines_sup">Matériel Disponible</span>
+                <h2 class="text-4xl font-extrabold text-smgp-dark mt-2 uppercase" data-i18n="sec_machines_title">Un Système Complet</h2>
+                <div class="w-24 h-1 bg-smgp-dark mx-auto mt-4 rounded"></div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+                <div class="group relative bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+                    <div class="absolute top-0 left-0 bg-smgp-dark text-white text-xs font-bold px-4 py-2 uppercase rounded-br-lg z-10" data-i18n="card_machine_badge">Machine de Projection</div>
+                    <div class="h-96 bg-white p-4 flex items-center justify-center relative overflow-hidden">
+                        <img src="machine.jpg" alt="Machine Evolution 001" class="object-contain h-full w-full group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400?text=Machine+JPG+Local'">
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-black text-smgp-dark uppercase mb-2">EVOLUTION 001</h3>
+                        <p class="text-gray-500 font-medium mb-6" data-i18n="card_machine_sub">Compacte & Transportable • 230 V</p>
+                        <p class="text-gray-600 mb-6 text-sm leading-relaxed" data-i18n="card_machine_desc">Machine conçue pour être facilement transportable. Idéale pour l'utilisation mobile sur tous vos chantiers en montagne ou accès difficile.</p>
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="bg-white p-3 rounded border border-gray-200 text-center"><i class="fas fa-plug text-smgp-orange mb-1"></i><div class="text-xs font-bold text-gray-400 uppercase" data-i18n="label_alim">Alim</div><div class="font-bold text-smgp-dark">230V</div></div>
+                            <div class="bg-white p-3 rounded border border-gray-200 text-center"><i class="fas fa-hose text-smgp-orange mb-1"></i><div class="text-xs font-bold text-gray-400 uppercase" data-i18n="label_hose">Tuyau</div><div class="font-bold text-smgp-dark">30 M</div></div>
+                        </div>
+                        <div class="mt-auto"><button onclick="openModal(1)" class="w-full bg-white border-2 border-smgp-dark text-smgp-dark font-bold py-3 rounded hover:bg-smgp-dark hover:text-white transition uppercase" data-i18n="btn_details">Détails Techniques</button></div>
+                    </div>
+                </div>
+                <div class="group relative bg-smgp-dark text-white rounded-2xl border border-gray-800 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
+                    <div class="absolute top-0 left-0 bg-smgp-orange text-white text-xs font-bold px-4 py-2 uppercase rounded-br-lg z-10" data-i18n="card_iso_badge">Isolant Projeté</div>
+                    <div class="h-96 bg-gray-800 p-4 flex items-center justify-center relative overflow-hidden">
+                        <img src="isolantprojete.jpg" alt="Isolant Mousse" class="object-contain h-full w-full opacity-90 group-hover:opacity-100 group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400?text=Isolant+JPG+Local'">
+                    </div>
+                    <div class="p-8 flex-1 flex flex-col">
+                        <h3 class="text-2xl font-black text-white uppercase mb-2">OSEO TOP 10</h3>
+                        <p class="text-gray-400 font-medium mb-6" data-i18n="card_iso_sub">Isolation 3 en 1 • RE2020</p>
+                        <p class="text-gray-300 mb-6 text-sm leading-relaxed" data-i18n="card_iso_desc">Bénéficiez d'une isolation thermique, acoustique (+70%) et d'une étanchéité à l'air haute performance. Parfait pour les normes énergétiques actuelles.</p>
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="bg-gray-800 p-3 rounded border border-gray-700 text-center"><i class="fas fa-clock text-smgp-orange mb-1"></i><div class="text-xs font-bold text-gray-500 uppercase" data-i18n="label_speed">Vitesse</div><div class="font-bold text-white">25m² / 20 min</div></div>
+                            <div class="bg-gray-800 p-3 rounded border border-gray-700 text-center"><i class="fas fa-leaf text-smgp-orange mb-1"></i><div class="text-xs font-bold text-gray-500 uppercase">Air</div><div class="font-bold text-white">Class A+</div></div>
+                        </div>
+                        <div class="mt-auto"><button onclick="openModal(2)" class="w-full bg-smgp-orange border-2 border-smgp-orange text-white font-bold py-3 rounded hover:bg-white hover:text-smgp-orange transition uppercase" data-i18n="btn_perf">Détails Performance</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="demo" class="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-smgp-orange opacity-5 rounded-full blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <span class="text-smgp-orange font-bold tracking-widest text-sm uppercase" data-i18n="sec_demo_sup">Démonstration</span>
+                    <h2 class="text-3xl font-extrabold mt-2" data-i18n="sec_demo_title">OSEOKIT EN ACTION</h2>
+                </div>
+                <div class="text-right">
+                    <span class="block text-sm text-gray-400" data-i18n="sec_demo_link">Voir la vidéo complète</span>
+                    <i class="fas fa-arrow-down text-smgp-orange"></i>
+                </div>
+            </div>
+            <div class="max-w-4xl mx-auto bg-gray-800 rounded-lg overflow-hidden shadow-2xl border border-gray-700">
+                <div class="aspect-video bg-black relative group">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/iX0A26m1dKw" title="Oseokit Pro Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="absolute inset-0 w-full h-full"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="parts" class="py-20 bg-slate-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-smgp-dark uppercase" data-i18n="sec_parts_title">Contenu du Kit & Consommables</h2>
+                <p class="text-gray-500 mt-2" data-i18n="sec_parts_desc">Livraison rapide en Andorre pour réassort et pièces. Cliquez pour voir les détails.</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="parts-grid">
+                </div>
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-block border-b-2 border-smgp-orange text-smgp-dark font-bold hover:text-smgp-orange pb-1 transition" data-i18n="parts_link">Demander le catalogue Andorre (PDF)</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-smgp-dark py-20 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 relative z-10">
+            <div class="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                <div class="md:w-2/5 bg-gray-800 p-8 text-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                             <img src="https://flagcdn.com/w80/ad.png" class="h-8 rounded shadow" alt="Drapeau">
+                             <h3 class="text-xl font-bold text-smgp-orange">SMGP Andorre</h3>
+                        </div>
+                        <div class="space-y-6 text-sm">
+                            <p class="text-gray-400 text-xs uppercase mb-4 font-bold border-b border-gray-700 pb-2" data-i18n="contact_official">Distributeur Officiel OSEOKIT</p>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-bold mb-1"><span class="text-base mr-1">🇫🇷</span> <span data-i18n="contact_fr">En Français</span></p>
+                                <a href="tel:+376670027" class="font-semibold text-lg block hover:text-smgp-orange transition">+376 670 027</a>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase font-bold mb-1"><span class="text-base mr-1">🇦🇩</span> <span data-i18n="contact_cat">En Catalan</span></p>
+                                <a href="tel:+376321765" class="font-semibold text-lg block hover:text-smgp-orange transition">+376 321 765</a>
+                            </div>
+                            <div><p class="text-xs text-gray-500 uppercase font-bold">Email</p><p class="font-semibold">contact@smgp-import.com</p></div>
+                            <div><p class="text-xs text-gray-500 uppercase font-bold" data-i18n="contact_zone">Zone d'intervention</p><p class="font-semibold text-white"><i class="fas fa-map-marker-alt text-smgp-orange"></i> Principauté d'Andorre</p></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-3/5 p-10">
+                    <h3 class="text-2xl font-bold text-smgp-dark mb-2" data-i18n="form_title">Projet en Andorre ?</h3>
+                    <p class="text-gray-500 mb-6 text-xs" data-i18n="form_sub">Devis gratuit pour le kit complet ou réassort.</p>
+                    <form onsubmit="handleFormSubmit(event)">
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1" data-i18n="form_name">Société / Nom</label>
+                            <input type="text" id="contact-name" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm invalid:border-red-500">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
+                            <input type="email" id="contact-email" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm invalid:border-red-500">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1" data-i18n="form_interest">Intérêt</label>
+                            <select id="contact-subject" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm font-bold text-smgp-dark invalid:border-red-500">
+                                <option value="Kit Complet Andorre">Kit Complet (Machine + Produits)</option>
+                                <option value="Machine Seule">Machine Evolution 001 Seule</option>
+                                <option value="Reassort Produits">Réassort Produits (A+B)</option>
+                                <option value="Formation">Demande de Formation</option>
+                            </select>
+                        </div>
+                        <button class="w-full bg-smgp-dark text-white font-bold py-3 rounded hover:bg-smgp-orange transition shadow-lg mt-2" data-i18n="form_btn">DEMANDER MON DEVIS</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-600 py-8 text-xs text-center border-t border-gray-800">
+        <div class="flex justify-center items-center gap-2 mb-2"><img src="https://flagcdn.com/w20/ad.png" class="h-3 grayscale opacity-50" alt="Flag"><span>SMGP Import Andorre</span></div>
+        <p>&copy; 2024 SMGP Import. Partenaire OSEOKIT PRO - Groupe MGH.</p>
+    </footer>
+
+    <script>
+        // --- 1. CONFIGURATION LANGUE ---
+        const translations = {
+            fr: {
+                nav_distributor: "DISTRIBUTEUR", nav_country: "ANDORRE", nav_kit: "Le Kit", nav_video: "Vidéos", nav_parts: "Pièces", nav_contact: "CONTACT",
+                hero_badge: "Distributeur Officiel • Principauté d'Andorre", hero_subtitle: "RAPIDE. EFFICACE.", hero_desc: "Isolez 25 m² en 20 minutes. Le système complet machine + isolant pour les professionnels du bâtiment.", hero_btn: "Découvrir le système",
+                sec_machines_sup: "Matériel Disponible", sec_machines_title: "Un Système Complet",
+                card_machine_badge: "Machine de Projection", card_machine_sub: "Compacte & Transportable • 230 V", card_machine_desc: "Machine conçue pour être facilement transportable. Idéale pour l'utilisation mobile sur tous vos chantiers en montagne ou accès difficile.",
+                label_alim: "Alim", label_hose: "Tuyau", btn_details: "Détails Techniques",
+                card_iso_badge: "Isolant Projeté", card_iso_sub: "Isolation 3 en 1 • RE2020", card_iso_desc: "Bénéficiez d'une isolation thermique, acoustique (+70%) et d'une étanchéité à l'air haute performance. Parfait pour les normes énergétiques actuelles.",
+                label_speed: "Vitesse", btn_perf: "Détails Performance",
+                sec_demo_sup: "Démonstration", sec_demo_title: "OSEOKIT EN ACTION", sec_demo_link: "Voir la vidéo complète",
+                sec_parts_title: "Contenu du Kit & Consommables", sec_parts_desc: "Livraison rapide en Andorre pour réassort et pièces. Cliquez pour voir les détails.", parts_link: "Demander le catalogue Andorre (PDF)",
+                contact_official: "Distributeur Officiel OSEOKIT", contact_fr: "En Français", contact_cat: "En Catalan", contact_zone: "Zone d'intervention",
+                form_title: "Projet en Andorre ?", form_sub: "Devis gratuit pour le kit complet ou réassort.", form_name: "Société / Nom", form_interest: "Intérêt", form_btn: "DEMANDER MON DEVIS",
+                specs_title: "Caractéristiques Clés", modal_btn: "Obtenir un devis"
+            },
+            ca: {
+                nav_distributor: "DISTRIBUÏDOR", nav_country: "ANDORRA", nav_kit: "El Kit", nav_video: "Vídeos", nav_parts: "Recanvis", nav_contact: "CONTACTE",
+                hero_badge: "Distribuïdor Oficial • Principat d'Andorra", hero_subtitle: "RÀPID. EFICAÇ.", hero_desc: "Aïlleu 25 m² en 20 minuts. El sistema complet màquina + aïllant per als professionals de la construcció.", hero_btn: "Descobreix el sistema",
+                sec_machines_sup: "Material Disponible", sec_machines_title: "Un Sistema Complet",
+                card_machine_badge: "Màquina de Projecció", card_machine_sub: "Compacta & Transportable • 230 V", card_machine_desc: "Màquina dissenyada per ser fàcilment transportable. Ideal per a l'ús mòbil en totes les vostres obres de muntanya o accés difícil.",
+                label_alim: "Alim", label_hose: "Mànega", btn_details: "Detalls Tècnics",
+                card_iso_badge: "Aïllant Projectat", card_iso_sub: "Aïllament 3 en 1 • RE2020", card_iso_desc: "Beneficieu-vos d'un aïllament tèrmic, acústic (+70%) i d'una estanquitat a l'aire d'alt rendiment. Perfecte per a les normes energètiques actuals.",
+                label_speed: "Velocitat", btn_perf: "Detalls Rendiment",
+                sec_demo_sup: "Demostració", sec_demo_title: "OSEOKIT EN ACCIÓ", sec_demo_link: "Veure el vídeo complet",
+                sec_parts_title: "Contingut del Kit & Consumibles", sec_parts_desc: "Lliurament ràpid a Andorra per a reposició i peces. Feu clic per veure els detalls.", parts_link: "Demanar el catàleg Andorra (PDF)",
+                contact_official: "Distribuïdor Oficial OSEOKIT", contact_fr: "En Francès", contact_cat: "En Català", contact_zone: "Zona d'intervenció",
+                form_title: "Projecte a Andorra?", form_sub: "Pressupost gratuït per al kit complet o recanvis.", form_name: "Empresa / Nom", form_interest: "Interès", form_btn: "DEMANAR PRESSUPOST",
+                specs_title: "Característiques Clau", modal_btn: "Obtenir un pressupost"
+            }
+        };
+
+        let currentLang = 'fr';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.innerText = translations[lang][key];
+            });
+            document.getElementById('btn-fr').classList.remove('active');
+            document.getElementById('btn-ca').classList.remove('active');
+            document.getElementById(`btn-${lang}`).classList.add('active');
+        }
+
+        // --- 2. DONNEES ---
+        const items = [
+            {
+                id: 1, type: 'machine', image: "machine.jpg",
+                name: "EVOLUTION 001", tag: "MACHINE", tag_ca: "MÀQUINA", ref: "REF-EVO-001",
+                desc: "Machine de projection portable. 230V.", desc_ca: "Màquina de projecció portàtil. 230V.",
+                specs: { l1: "230V", l2: "30 M", l3: "Compacte", l3_ca: "Compacta", l4: "Mobile", l4_ca: "Mòbil" },
+                labels: ["Alim", "Tuyau", "Format", "Usage"], labels_ca: ["Alimentació", "Canonada", "Format", "Ús"]
+            },
+            {
+                // MODIFICATION ICI : Image locale
+                id: 2, type: 'isolant', image: "isolantprojete.jpg",
+                name: "OSEO TOP 10", tag: "ISOLANT", tag_ca: "AÏLLANT", ref: "REF-ISO-TOP",
+                desc: "Mousse polyuréthane 3 en 1.", desc_ca: "Escuma de poliuretà 3 en 1.",
+                specs: { l1: "A+", l2: "Immédiate", l2_ca: "Immediata", l3: "25m²", l4: "RE2020" },
+                labels: ["Air", "Etanchéité", "Rendement", "Norme"], labels_ca: ["Aire", "Estanquitat", "Rendiment", "Norma"]
+            }
+        ];
+
+        const parts = [
+            { 
+                id: 101, name: "Bidon Isocyanate (A)", name_ca: "Bidó Isocianat (A)", 
+                tag: "CHIMIE", tag_ca: "QUÍMICA", ref: "REF-ISO-A",
+                desc: "Composant A pour le mélange OSEOKIT. Bidon scellé.", 
+                desc_ca: "Component A per a la barreja OSEOKIT. Bidó segellat.", 
+                image: "bidon.jpg",
+                specs: { l1: "Liquide", l1_ca: "Líquid", l2: "Origine FR", l2_ca: "Origen FR" },
+                labels: ["Etat", "Fab"], labels_ca: ["Estat", "Fab"]
+            },
+            { 
+                id: 102, name: "Bidon Polyol (B)", name_ca: "Bidó Poliol (B)", 
+                tag: "CHIMIE", tag_ca: "QUÍMICA", ref: "REF-POL-B",
+                desc: "Composant B pour le mélange OSEOKIT. Bidon scellé.", 
+                desc_ca: "Component B per a la barreja OSEOKIT. Bidó segellat.", 
+                image: "bidon.jpg",
+                specs: { l1: "Liquide", l1_ca: "Líquid", l2: "Origine FR", l2_ca: "Origen FR" },
+                labels: ["Etat", "Fab"], labels_ca: ["Estat", "Fab"]
+            },
+            { 
+                id: 103, name: "Pistolet Projection", name_ca: "Pistola de Projecció", 
+                tag: "ACCESSOIRE", tag_ca: "ACCESSORI", ref: "REF-PIST-01",
+                desc: "Pistolet ergonomique pour machine Evolution 001. Léger et précis.", 
+                desc_ca: "Pistola ergonòmica per a màquina Evolution 001. Lleugera i precisa.", 
+                image: "pistolet.jpg",
+                specs: { l1: "Ergo", l1_ca: "Ergo", l2: "Précis", l2_ca: "Precís" },
+                labels: ["Type", "Atout"], labels_ca: ["Tipus", "Avantatge"]
+            },
+            { 
+                id: 104, name: "Tuyaux 30m", name_ca: "Mànegues 30m", 
+                tag: "INCLUS", tag_ca: "INCLÒS", ref: "REF-TUY-30",
+                desc: "Jeu de tuyaux chauffants de 30 mètres pour une portée maximale.", 
+                desc_ca: "Joc de mànegues calefactades de 30 metres per a un abast màxim.", 
+                image: "https://placehold.co/200x200?text=Tuyau+30m",
+                specs: { l1: "30m", l2: "Chauffant", l2_ca: "Calefactat" },
+                labels: ["Longueur", "Type"], labels_ca: ["Longitud", "Tipus"]
+            }
+        ];
+
+        // --- 3. AFFICHAGE PIECES ---
+        const partsGrid = document.getElementById('parts-grid');
+        parts.forEach(part => {
+            partsGrid.innerHTML += `
+                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition clickable-card text-center group" onclick="openModal(${part.id})">
+                    <img src="${part.img || part.image}" class="w-24 h-24 mx-auto mb-3 object-contain opacity-80 group-hover:scale-110 transition">
+                    <div class="text-xs font-bold text-smgp-orange uppercase mb-1">${part.tag}</div>
+                    <div class="font-bold text-smgp-dark text-sm leading-tight">${part.name}</div>
+                </div>
+            `;
+        });
+
+        // --- 4. LOGIQUE MODAL UNIFIEE ---
+        const modal = document.getElementById('product-modal');
+
+        function openModal(id) {
+            // Cherche dans les items (machines) OU dans les parts
+            let item = items.find(i => i.id === id);
+            if (!item) item = parts.find(p => p.id === id);
+            if (!item) return;
+
+            document.getElementById('modal-img').src = item.image || item.img;
+            
+            // Textes selon langue
+            if(currentLang === 'ca') {
+                document.getElementById('modal-title').innerText = item.name_ca || item.name;
+                document.getElementById('modal-tag').innerText = item.tag_ca || item.tag;
+                document.getElementById('modal-ref').innerText = "Ref: " + item.ref;
+                document.getElementById('modal-desc').innerText = item.desc_ca || item.desc;
+                
+                // Specs
+                if(item.specs && item.labels_ca) {
+                    document.getElementById('modal-specs-container').classList.remove('hidden');
+                    document.getElementById('label-1').innerText = item.labels_ca[0] || "-";
+                    document.getElementById('modal-spec1').innerText = item.specs.l1_ca || item.specs.l1 || "-";
+                    
+                    document.getElementById('label-2').innerText = item.labels_ca[1] || "-";
+                    document.getElementById('modal-spec2').innerText = item.specs.l2_ca || item.specs.l2 || "-";
+                    
+                    // Gérer l'affichage des lignes 3 et 4 si elles existent
+                    const row3 = document.getElementById('spec-row-3');
+                    if (item.specs.l3) {
+                        row3.classList.remove('hidden');
+                        document.getElementById('label-3').innerText = item.labels_ca[2];
+                        document.getElementById('modal-spec3').innerText = item.specs.l3_ca || item.specs.l3;
+                    } else { row3.classList.add('hidden'); }
+
+                    const row4 = document.getElementById('spec-row-4');
+                    if (item.specs.l4) {
+                        row4.classList.remove('hidden');
+                        document.getElementById('label-4').innerText = item.labels_ca[3];
+                        document.getElementById('modal-spec4').innerText = item.specs.l4_ca || item.specs.l4;
+                    } else { row4.classList.add('hidden'); }
+
+                } else {
+                    document.getElementById('modal-specs-container').classList.add('hidden');
+                }
+
+            } else {
+                // FRANCAIS
+                document.getElementById('modal-title').innerText = item.name;
+                document.getElementById('modal-tag').innerText = item.tag;
+                document.getElementById('modal-ref').innerText = "Réf: " + item.ref;
+                document.getElementById('modal-desc').innerText = item.desc;
+
+                if(item.specs && item.labels) {
+                    document.getElementById('modal-specs-container').classList.remove('hidden');
+                    document.getElementById('label-1').innerText = item.labels[0];
+                    document.getElementById('modal-spec1').innerText = item.specs.l1;
+                    
+                    document.getElementById('label-2').innerText = item.labels[1];
+                    document.getElementById('modal-spec2').innerText = item.specs.l2;
+
+                    const row3 = document.getElementById('spec-row-3');
+                    if (item.specs.l3) {
+                        row3.classList.remove('hidden');
+                        document.getElementById('label-3').innerText = item.labels[2];
+                        document.getElementById('modal-spec3').innerText = item.specs.l3;
+                    } else { row3.classList.add('hidden'); }
+
+                    const row4 = document.getElementById('spec-row-4');
+                    if (item.specs.l4) {
+                        row4.classList.remove('hidden');
+                        document.getElementById('label-4').innerText = item.labels[3];
+                        document.getElementById('modal-spec4').innerText = item.specs.l4;
+                    } else { row4.classList.add('hidden'); }
+                } else {
+                    document.getElementById('modal-specs-container').classList.add('hidden');
+                }
+            }
+
+            // Pré-remplir le formulaire
+            document.getElementById('contact-subject').value = item.name + (currentLang==='ca' ? " (Andorra)" : " (Andorre)");
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        function scrollToContact() {
+            closeModal();
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const subject = document.getElementById('contact-subject').value;
+            
+            const dest = "samuelmettez@yahoo.com";
+            const body = `Bonjour,\n\nNouvelle demande depuis le site SMGP Andorre.\n\nNom: ${name}\nEmail: ${email}\nIntérêt: ${subject}`;
+            
+            window.location.href = `mailto:${dest}?subject=CONTACT SMGP ANDORRE: ${subject}&body=${encodeURIComponent(body)}`;
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") closeModal();
+        });
+    </script>
+</body>
+</html>
