@@ -115,13 +115,12 @@
                 
                 <div class="flex items-center gap-4 md:gap-6">
                     <div class="hidden md:flex space-x-8 items-center">
+                        <a href="#video" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_video">VIDÉO</a>
                         <a href="#machines" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_kit">LE KIT</a>
                         <a href="#comparaison" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_comp">AVANTAGES</a>
                         <a href="#parts" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_parts">PIÈCES & EPI</a>
                         <a href="#formation" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_formation">FORMATION</a>
-                        <a href="#contact" class="bg-smgp-dark text-white px-6 py-3 rounded font-bold hover:bg-smgp-orange transition shadow-md text-sm" data-i18n="nav_contact">
-                            CONTACT
-                        </a>
+                        <a href="#contact" class="bg-smgp-dark text-white px-6 py-3 rounded font-bold hover:bg-smgp-orange transition shadow-md text-sm" data-i18n="nav_contact">CONTACT</a>
                     </div>
                     
                     <div class="flex items-center gap-2 md:border-l md:pl-4 border-gray-200">
@@ -138,6 +137,7 @@
 
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 absolute w-full left-0 shadow-2xl z-40">
             <div class="px-4 pt-2 pb-6 flex flex-col space-y-2">
+                <a href="#video" class="block px-4 py-3 rounded-lg text-sm font-bold text-gray-700 hover:text-smgp-orange hover:bg-gray-50 uppercase border-b border-gray-100" data-i18n="nav_video" onclick="toggleMobileMenu()">VIDÉO</a>
                 <a href="#machines" class="block px-4 py-3 rounded-lg text-sm font-bold text-gray-700 hover:text-smgp-orange hover:bg-gray-50 uppercase border-b border-gray-100" data-i18n="nav_kit" onclick="toggleMobileMenu()">LE KIT</a>
                 <a href="#comparaison" class="block px-4 py-3 rounded-lg text-sm font-bold text-gray-700 hover:text-smgp-orange hover:bg-gray-50 uppercase border-b border-gray-100" data-i18n="nav_comp" onclick="toggleMobileMenu()">AVANTAGES</a>
                 <a href="#parts" class="block px-4 py-3 rounded-lg text-sm font-bold text-gray-700 hover:text-smgp-orange hover:bg-gray-50 uppercase border-b border-gray-100" data-i18n="nav_parts" onclick="toggleMobileMenu()">PIÈCES & EPI</a>
@@ -161,11 +161,22 @@
                 <p class="text-lg md:text-xl font-medium text-white leading-relaxed" data-i18n="hero_desc">Isolez 25 m² en moins de 25 minutes. Le système complet machine + isolant garanti à vie pour les professionnels.</p>
             </div>
             <div class="flex justify-center">
-                <a href="#machines" class="bg-white text-smgp-dark px-10 py-4 rounded font-extrabold text-sm tracking-widest hover:bg-smgp-orange hover:text-white transition shadow-2xl transform hover:scale-105 uppercase border-2 border-white" data-i18n="hero_btn">Découvrir le système</a>
+                <a href="#video" class="bg-white text-smgp-dark px-10 py-4 rounded font-extrabold text-sm tracking-widest hover:bg-smgp-orange hover:text-white transition shadow-2xl transform hover:scale-105 uppercase border-2 border-white" data-i18n="hero_btn">Découvrir le système</a>
             </div>
             <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white/70 animate-bounce"><i class="fas fa-chevron-down text-3xl"></i></div>
         </div>
     </header>
+
+    <section id="video" class="py-20 bg-smgp-dark text-white border-y border-gray-800">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <span class="text-smgp-orange font-bold tracking-widest text-sm uppercase" data-i18n="sec_video_sup">En action</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-2 mb-10 uppercase" data-i18n="sec_video_title">Découvrez l'OseoKit en vidéo</h2>
+            
+            <div class="relative w-full overflow-hidden rounded-2xl shadow-2xl border-4 border-gray-800" style="padding-top: 56.25%;">
+              <iframe class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/iX0A26m1dKw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
 
     <section id="machines" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4">
@@ -405,8 +416,9 @@
         // --- 1. CONFIGURATION LANGUE ---
         const translations = {
             fr: {
-                nav_distributor: "DISTRIBUTEUR", nav_country: "ANDORRE", nav_kit: "LE KIT", nav_comp: "AVANTAGES", nav_parts: "PIÈCES & EPI", nav_formation: "FORMATION", nav_contact: "CONTACT",
+                nav_distributor: "DISTRIBUTEUR", nav_country: "ANDORRE", nav_video: "VIDÉO", nav_kit: "LE KIT", nav_comp: "AVANTAGES", nav_parts: "PIÈCES & EPI", nav_formation: "FORMATION", nav_contact: "CONTACT",
                 hero_badge: "Distributeur Officiel • Principauté d'Andorre", hero_subtitle: "RAPIDE. EFFICACE.", hero_desc: "Isolez 25 m² en moins de 25 minutes. Le système complet machine + isolant garanti à vie pour les professionnels.", hero_btn: "Découvrir le système",
+                sec_video_sup: "En action", sec_video_title: "Découvrez l'OseoKit en vidéo",
                 sec_machines_sup: "Matériel Disponible", sec_machines_title: "Un Système Complet",
                 card_machine_badge: "Machine de Projection", card_machine_sub: "Compacte & Transportable • 230 V", card_machine_desc: "Machine conçue pour être facilement transportable. Idéale pour l'utilisation mobile sur tous vos chantiers en montagne ou accès difficile.",
                 label_alim: "Alim", label_hose: "Tuyau", btn_details: "Détails Techniques",
@@ -422,8 +434,9 @@
                 specs_title: "Caractéristiques Clés", modal_btn: "Obtenir un devis", footer_rights: "Tous droits réservés. Reproduction interdite sans autorisation."
             },
             ca: {
-                nav_distributor: "DISTRIBUÏDOR", nav_country: "ANDORRA", nav_kit: "EL KIT", nav_comp: "AVANTATGES", nav_parts: "RECANVIS I EPI", nav_formation: "FORMACIÓ", nav_contact: "CONTACTE",
+                nav_distributor: "DISTRIBUÏDOR", nav_country: "ANDORRA", nav_video: "VÍDEO", nav_kit: "EL KIT", nav_comp: "AVANTATGES", nav_parts: "RECANVIS I EPI", nav_formation: "FORMACIÓ", nav_contact: "CONTACTE",
                 hero_badge: "Distribuïdor Oficial • Principat d'Andorra", hero_subtitle: "RÀPID. EFICAÇ.", hero_desc: "Aïlleu 25 m² en menys de 25 minuts. El sistema complet màquina + aïllant garantit de per vida per a professionals.", hero_btn: "Descobriu el sistema",
+                sec_video_sup: "En acció", sec_video_title: "Descobriu l'OseoKit en vídeo",
                 sec_machines_sup: "Material Disponible", sec_machines_title: "Un Sistema Complet",
                 card_machine_badge: "Màquina de Projecció", card_machine_sub: "Compacta i Transportable • 230 V", card_machine_desc: "Màquina dissenyada per ser fàcilment transportable. Ideal per a l'ús mòbil en totes les vostres obres de muntanya o d'accés difícil.",
                 label_alim: "Alim", label_hose: "Mànega", btn_details: "Detalls Tècnics",
@@ -522,7 +535,7 @@
             { id: 106, name: "Kit Protection Ventilé Dräger", name_ca: "Kit Protecció Ventilat Dräger", tag: "EPI", tag_ca: "EPI", ref: "REF-DRAG-KIT", desc: "Kit complet de protection respiratoire ventilé Dräger pour une sécurité optimale lors de la projection.", desc_ca: "Kit complet de protecció respiratòria ventilada Dräger per a una seguretat òptima durant la projecció.", image: "https://placehold.co/200x200?text=Kit+Drager", specs: { l1: "Complet", l1_ca: "Complet", l2: "Sécurité Pro", l2_ca: "Seguretat Pro" }, labels: ["Format", "Niveau"], labels_ca: ["Format", "Nivell"] },
             { id: 107, name: "Combinaison Blanche + Cagoule", name_ca: "Granota Blanca + Caputxa", tag: "EPI", tag_ca: "EPI", ref: "REF-COMBI", desc: "Combinaison de protection blanche intégrale avec cagoule. Disponible en tailles L, XL, XXL.", desc_ca: "Granota de protecció blanca integral amb caputxa. Disponible en talles L, XL, XXL.", image: "https://placehold.co/200x200?text=Combinaison", specs: { l1: "L, XL, XXL", l1_ca: "L, XL, XXL", l2: "Avec cagoule", l2_ca: "Amb caputxa" }, labels: ["Tailles", "Inclus"], labels_ca: ["Talles", "Inclou"] },
             { id: 108, name: "Batterie Standard Dräger", name_ca: "Bateria Estàndard Dräger", tag: "ENERGIE", tag_ca: "ENERGIA", ref: "REF-BAT-STD", desc: "Batterie standard pour système Dräger. Offre de 4 à 8h d'autonomie selon l'utilisation.", desc_ca: "Bateria estàndard per al sistema Dräger. Ofereix de 4 a 8h d'autonomia segons l'ús.", image: "https://placehold.co/200x200?text=Batterie+Standard", specs: { l1: "4 à 8h", l1_ca: "4 a 8h", l2: "Standard", l2_ca: "Estàndard" }, labels: ["Autonomie", "Type"], labels_ca: ["Autonomia", "Tipus"] },
-            { id: 109, name: "Batterie Haute Capacité Dräger", name_ca: "Bateria Alta Capacitat Dräger", tag: "ENERGIE", tag_ca: "ENERGIA", ref: "REF-BAT-HC", desc: "Batterie haute capacité pour système Dräger. Offre de 8 à 24h d'autonomie.", desc_ca: "Bateria d'alta capacitat per al sistema Dräger. Ofereix de 8 a 24h d'autonomia.", image: "https://placehold.co/200x200?text=Batterie+HC", specs: { l1: "8 à 24h", l1_ca: "8 a 24h", l2: "Haute Capacité", l2_ca: "Alta Capacitat" }, labels: ["Autonomie", "Type"], labels_ca: ["Autonomia", "Tipus"] },
+            { id: 109, name: "Batterie Haute Capacité Dräger", name_ca: "Bateria Alta Capacitat Dräger", tag: "ENERGIE", tag_ca: "ENERGIA", ref: "REF-BAT-HC", desc: "Batterie haute capacitat per al sistema Dräger. Ofereix de 8 a 24h d'autonomia.", image: "https://placehold.co/200x200?text=Batterie+HC", specs: { l1: "8 à 24h", l1_ca: "8 a 24h", l2: "Haute Capacité", l2_ca: "Alta Capacitat" }, labels: ["Autonomie", "Type"], labels_ca: ["Autonomia", "Tipus"] },
             { id: 110, name: "Unité de Ventilation X-Plore 8500", name_ca: "Unitat de Ventilació X-Plore 8500", tag: "EPI", tag_ca: "EPI", ref: "REF-VENT-8500", desc: "Unité de ventilation moteur pour une assistance respiratoire constante.", desc_ca: "Unitat de ventilació motoritzada per a una assistència respiratòria constant.", image: "https://placehold.co/200x200?text=Ventilation", specs: { l1: "X-Plore 8500", l1_ca: "X-Plore 8500", l2: "Motorisée", l2_ca: "Motoritzada" }, labels: ["Modèle", "Système"], labels_ca: ["Model", "Sistema"] },
             { id: 111, name: "Filtres & Pré-filtres", name_ca: "Filtres i Prefiltres", tag: "CONSOMMABLE", tag_ca: "CONSUMIBLE", ref: "REF-FILTRES", desc: "Filtres combinés anti-gaz/particules, lots de 10 pré-filtres anti-poussière, filtre DC-1 anti-humidité.", desc_ca: "Filtres combinats antigàs/partícules, lots de 10 prefiltres antipols, filtre DC-1 antihumitat.", image: "https://placehold.co/200x200?text=Filtres", specs: { l1: "Anti-gaz / Poussière", l1_ca: "Antigàs / Pols", l2: "Anti-humidité", l2_ca: "Antihumitat" }, labels: ["Protection", "Option"], labels_ca: ["Protecció", "Opció"] },
             { id: 112, name: "Consommables & Entretien", name_ca: "Consumibles i Manteniment", tag: "ENTRETIEN", tag_ca: "MANTENIMENT", ref: "REF-CONS", desc: "Gants (manutention/nitrile), vaseline, lubrifiant machine, films de protection visière, lames cutter, adhésifs, sacs poubelle, etc.", desc_ca: "Guants (manipulació/nitril), vaselina, lubricant de màquina, films de protecció per a visera, fulles de cúter, adhesius, bosses d'escombraries, etc.", image: "https://placehold.co/200x200?text=Consommables", specs: { l1: "Divers", l1_ca: "Diversos", l2: "Stock dispo", l2_ca: "Estoc disp." }, labels: ["Type", "Disponibilité"], labels_ca: ["Tipus", "Disponibilitat"] },
