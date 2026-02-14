@@ -368,18 +368,21 @@
                 <div class="md:w-3/5 p-10">
                     <h3 class="text-2xl font-bold text-smgp-dark mb-2" data-i18n="form_title">Projet en Andorre ?</h3>
                     <p class="text-gray-500 mb-6 text-xs" data-i18n="form_sub">Devis gratuit pour le kit complet ou réapprovisionnement.</p>
-                    <form onsubmit="handleFormSubmit(event)">
+                    
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="e43187e0-07f7-46da-9c0a-81f1c7c673e7">
+                        
                         <div class="mb-4">
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1" data-i18n="form_name">Société / Nom</label>
-                            <input type="text" id="contact-name" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm invalid:border-red-500">
+                            <input type="text" name="nom" id="contact-name" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm">
                         </div>
                         <div class="mb-4">
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Email</label>
-                            <input type="email" id="contact-email" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm invalid:border-red-500">
+                            <input type="email" name="email" id="contact-email" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm">
                         </div>
                         <div class="mb-4">
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1" data-i18n="form_interest">Intérêt</label>
-                            <select id="contact-subject" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm font-bold text-smgp-dark invalid:border-red-500">
+                            <select name="interet" id="contact-subject" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm font-bold text-smgp-dark">
                                 <option value="Kit Complet Andorre" data-i18n="opt_1">Kit Complet (Machine + Produits)</option>
                                 <option value="Machine Seule" data-i18n="opt_2">Machine Evolution 003 Seule</option>
                                 <option value="Réapprovisionnement Produits" data-i18n="opt_3">Réapprovisionnement Produits (A+B)</option>
@@ -387,7 +390,7 @@
                                 <option value="Formation" data-i18n="opt_5">Demande de Formation</option>
                             </select>
                         </div>
-                        <button class="w-full bg-smgp-dark text-white font-bold py-3 rounded hover:bg-smgp-orange transition shadow-lg mt-2" data-i18n="form_btn">DEMANDER MON DEVIS</button>
+                        <button type="submit" class="w-full bg-smgp-dark text-white font-bold py-3 rounded hover:bg-smgp-orange transition shadow-lg mt-2" data-i18n="form_btn">DEMANDER MON DEVIS</button>
                     </form>
                 </div>
             </div>
@@ -561,6 +564,15 @@
             });
         }
 
+        // --- FONCTION MANQUANTE POUR LE DÉFILEMENT DU CARROUSEL ---
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById('parts-carousel');
+            const scrollAmount = 300; // Ajuste cette valeur selon la largeur de tes cartes
+            if (carousel) {
+                carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+            }
+        }
+
         // --- 4. LOGIQUE MODAL UNIFIEE ---
         const modal = document.getElementById('product-modal');
 
@@ -643,7 +655,7 @@
                 }
             }
 
-            // CORRECTION DU BUG JAVASCRIPT ICI
+            // Sélection automatique dans le formulaire de contact
             const customSubject = (currentLang === 'ca' ? (item.name_ca || item.name) + " (Andorra)" : (item.name) + " (Andorre)");
             const subjectSelect = document.getElementById('contact-subject');
 
@@ -668,23 +680,6 @@
         function scrollToContact() {
             closeModal();
             document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById('contact-name').value;
-            const email = document.getElementById('contact-email').value;
-            const subjectSelect = document.getElementById('contact-subject');
-            
-            // CORRECTION DU BUG JAVASCRIPT ICI
-            const subjectText = subjectSelect.selectedIndex >= 0 
-                ? subjectSelect.options[subjectSelect.selectedIndex].text 
-                : subjectSelect.value;
-            
-            const dest = "samuelmettez@yahoo.com";
-            const body = `Bonjour,\n\nNouvelle demande depuis le site SMGP Andorre.\n\nNom: ${name}\nEmail: ${email}\nIntérêt: ${subjectText}`;
-            
-            window.location.href = `mailto:${dest}?subject=${encodeURIComponent("CONTACT SMGP ANDORRE: " + subjectText)}&body=${encodeURIComponent(body)}`;
         }
 
         document.addEventListener('keydown', function(event) {
