@@ -597,7 +597,18 @@
                 }
             }
 
-            document.getElementById('contact-subject').value = (currentLang==='ca' ? (item.name_ca || item.name) : item.name) + (currentLang==='ca' ? " (Andorra)" : " (Andorre)");
+            // CORRECTION DU BUG JAVASCRIPT ICI
+            const customSubject = (currentLang === 'ca' ? (item.name_ca || item.name) + " (Andorra)" : (item.name) + " (Andorre)");
+            const subjectSelect = document.getElementById('contact-subject');
+
+            let optionExists = Array.from(subjectSelect.options).some(opt => opt.value === customSubject);
+
+            if (!optionExists) {
+                const newOption = new Option(customSubject, customSubject);
+                subjectSelect.add(newOption);
+            }
+
+            subjectSelect.value = customSubject;
             
             modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -617,14 +628,17 @@
             e.preventDefault();
             const name = document.getElementById('contact-name').value;
             const email = document.getElementById('contact-email').value;
-            // On récupère le texte visible de l'option choisie
             const subjectSelect = document.getElementById('contact-subject');
-            const subjectText = subjectSelect.options[subjectSelect.selectedIndex].text;
+            
+            // CORRECTION DU BUG JAVASCRIPT ICI
+            const subjectText = subjectSelect.selectedIndex >= 0 
+                ? subjectSelect.options[subjectSelect.selectedIndex].text 
+                : subjectSelect.value;
             
             const dest = "samuelmettez@yahoo.com";
             const body = `Bonjour,\n\nNouvelle demande depuis le site SMGP Andorre.\n\nNom: ${name}\nEmail: ${email}\nIntérêt: ${subjectText}`;
             
-            window.location.href = `mailto:${dest}?subject=CONTACT SMGP ANDORRE: ${subjectText}&body=${encodeURIComponent(body)}`;
+            window.location.href = `mailto:${dest}?subject=${encodeURIComponent("CONTACT SMGP ANDORRE: " + subjectText)}&body=${encodeURIComponent(body)}`;
         }
 
         document.addEventListener('keydown', function(event) {
