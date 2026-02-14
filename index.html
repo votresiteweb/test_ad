@@ -35,13 +35,14 @@
         .card-zoom:hover img { transform: scale(1.05); }
         .card-zoom img { transition: transform 0.5s ease; }
         
-        /* MODIFICATION ICI : Suppression du filtre grayscale pour avoir les couleurs */
         .lang-btn { opacity: 0.7; transition: all 0.3s; } 
         .lang-btn.active { opacity: 1; transform: scale(1.1); }
         .lang-btn:hover { opacity: 1; }
         
-        /* Curseur pointer pour les pièces cliquables */
         .clickable-card { cursor: pointer; }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-gray-50 font-sans text-slate-800">
@@ -52,7 +53,7 @@
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
                 <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-5xl border-t-4 border-smgp-orange">
                     <div class="absolute right-0 top-0 pr-4 pt-4 z-20">
-                        <button type="button" onclick="closeModal()" class="rounded-full bg-white/80 p-2 text-gray-800 hover:text-red-600 transition">
+                        <button type="button" onclick="closeModal()" class="rounded-full bg-white/80 p-2 text-gray-800 hover:text-red-600 transition shadow-sm">
                             <i class="fas fa-times text-xl"></i>
                         </button>
                     </div>
@@ -71,11 +72,11 @@
                                     <ul class="space-y-3 text-sm text-gray-700">
                                         <li class="flex justify-between"><span><i class="fas fa-info-circle text-smgp-orange w-6"></i> <span id="label-1">-</span>:</span> <span class="font-bold" id="modal-spec1">-</span></li>
                                         <li class="flex justify-between"><span><i class="fas fa-check text-smgp-orange w-6"></i> <span id="label-2">-</span>:</span> <span class="font-bold" id="modal-spec2">-</span></li>
-                                        <li class="flex justify-between hidden" id="spec-row-3"><span><i class="fas fa-star text-smgp-orange w-6"></i> <span id="label-3">-</span>:</span> <span class="font-bold" id="modal-spec3">-</span></li>
-                                        <li class="flex justify-between hidden" id="spec-row-4"><span><i class="fas fa-certificate text-smgp-orange w-6"></i> <span id="label-4">-</span>:</span> <span class="font-bold" id="modal-spec4">-</span></li>
+                                        <li class="flex justify-between hidden" id="spec-row-3"><span><i class="fas fa-expand-arrows-alt text-smgp-orange w-6"></i> <span id="label-3">-</span>:</span> <span class="font-bold" id="modal-spec3">-</span></li>
+                                        <li class="flex justify-between hidden" id="spec-row-4"><span><i class="fas fa-weight-hanging text-smgp-orange w-6"></i> <span id="label-4">-</span>:</span> <span class="font-bold" id="modal-spec4">-</span></li>
                                     </ul>
                                 </div>
-                                <p class="text-sm text-gray-600 leading-relaxed" id="modal-desc">Description...</p>
+                                <div class="text-sm text-gray-600 leading-relaxed" id="modal-desc">Description...</div>
                             </div>
                             <div class="mt-8">
                                 <button onclick="scrollToContact()" class="w-full bg-smgp-dark text-white px-4 py-4 rounded hover:bg-smgp-orange transition font-bold shadow-lg flex items-center justify-center gap-2 group uppercase tracking-widest">
@@ -104,9 +105,10 @@
                 </div>
                 <div class="flex items-center gap-6">
                     <div class="hidden md:flex space-x-8 items-center">
-                        <a href="#machines" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_kit">Le Kit</a>
-                        <a href="#demo" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_video">Vidéos</a>
-                        <a href="#parts" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_parts">Pièces</a>
+                        <a href="#machines" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_kit">LE KIT</a>
+                        <a href="#comparaison" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_comp">AVANTAGES</a>
+                        <a href="#parts" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_parts">PIÈCES & EPI</a>
+                        <a href="#formation" class="font-bold text-gray-700 hover:text-smgp-orange transition uppercase text-sm" data-i18n="nav_formation">FORMATION</a>
                         <a href="#contact" class="bg-smgp-dark text-white px-6 py-3 rounded font-bold hover:bg-smgp-orange transition shadow-md text-sm" data-i18n="nav_contact">
                             CONTACT
                         </a>
@@ -131,7 +133,7 @@
             <h1 class="text-6xl md:text-8xl font-black text-white mb-4 tracking-tighter drop-shadow-2xl uppercase leading-tight">OSEOKIT PRO</h1>
             <h2 class="text-4xl md:text-6xl font-black text-smgp-orange mb-8 tracking-tighter drop-shadow-2xl uppercase" data-i18n="hero_subtitle">RAPIDE. EFFICACE.</h2>
             <div class="inline-block bg-black/40 backdrop-blur-sm p-6 rounded-xl border border-white/10 mb-10 max-w-3xl">
-                <p class="text-lg md:text-xl font-medium text-white leading-relaxed" data-i18n="hero_desc">Isolez 25 m² en 20 minutes. Le système complet machine + isolant pour les professionnels du bâtiment.</p>
+                <p class="text-lg md:text-xl font-medium text-white leading-relaxed" data-i18n="hero_desc">Isolez 25 m² en moins de 25 minutes. Le système complet machine + isolant garanti à vie pour les professionnels.</p>
             </div>
             <div class="flex justify-center">
                 <a href="#machines" class="bg-white text-smgp-dark px-10 py-4 rounded font-extrabold text-sm tracking-widest hover:bg-smgp-orange hover:text-white transition shadow-2xl transform hover:scale-105 uppercase border-2 border-white" data-i18n="hero_btn">Découvrir le système</a>
@@ -151,10 +153,10 @@
                 <div class="group relative bg-gray-50 rounded-2xl border border-gray-200 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
                     <div class="absolute top-0 left-0 bg-smgp-dark text-white text-xs font-bold px-4 py-2 uppercase rounded-br-lg z-10" data-i18n="card_machine_badge">Machine de Projection</div>
                     <div class="h-96 bg-white p-4 flex items-center justify-center relative overflow-hidden">
-                        <img src="machine.jpg" alt="Machine Evolution 001" class="object-contain h-full w-full group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400?text=Machine+JPG+Local'">
+                        <img src="machine.jpg" alt="Machine Evolution 003" class="object-contain h-full w-full group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400?text=Machine+JPG+Local'">
                     </div>
                     <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-black text-smgp-dark uppercase mb-2">EVOLUTION 001</h3>
+                        <h3 class="text-2xl font-black text-smgp-dark uppercase mb-2">EVOLUTION 003</h3>
                         <p class="text-gray-500 font-medium mb-6" data-i18n="card_machine_sub">Compacte & Transportable • 230 V</p>
                         <p class="text-gray-600 mb-6 text-sm leading-relaxed" data-i18n="card_machine_desc">Machine conçue pour être facilement transportable. Idéale pour l'utilisation mobile sur tous vos chantiers en montagne ou accès difficile.</p>
                         <div class="grid grid-cols-2 gap-4 mb-8">
@@ -171,10 +173,10 @@
                     </div>
                     <div class="p-8 flex-1 flex flex-col">
                         <h3 class="text-2xl font-black text-white uppercase mb-2">OSEO TOP 10</h3>
-                        <p class="text-gray-400 font-medium mb-6" data-i18n="card_iso_sub">Isolation 3 en 1 • RE2020</p>
-                        <p class="text-gray-300 mb-6 text-sm leading-relaxed" data-i18n="card_iso_desc">Bénéficiez d'une isolation thermique, acoustique (+70%) et d'une étanchéité à l'air haute performance. Parfait pour les normes énergétiques actuelles.</p>
+                        <p class="text-gray-400 font-medium mb-6" data-i18n="card_iso_sub">Isolation 3 en 1 • Garanti à vie</p>
+                        <p class="text-gray-300 mb-6 text-sm leading-relaxed" data-i18n="card_iso_desc">Bénéficiez d'une isolation thermique, acoustique (+70%) et d'une étanchéité à l'air haute performance avec seulement 4% de matière chimique.</p>
                         <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="bg-gray-800 p-3 rounded border border-gray-700 text-center"><i class="fas fa-clock text-smgp-orange mb-1"></i><div class="text-xs font-bold text-gray-500 uppercase" data-i18n="label_speed">Vitesse</div><div class="font-bold text-white">25m² / 20 min</div></div>
+                            <div class="bg-gray-800 p-3 rounded border border-gray-700 text-center"><i class="fas fa-clock text-smgp-orange mb-1"></i><div class="text-xs font-bold text-gray-500 uppercase" data-i18n="label_speed">Vitesse</div><div class="font-bold text-white">< 25 min</div></div>
                             <div class="bg-gray-800 p-3 rounded border border-gray-700 text-center"><i class="fas fa-leaf text-smgp-orange mb-1"></i><div class="text-xs font-bold text-gray-500 uppercase">Air</div><div class="font-bold text-white">Class A+</div></div>
                         </div>
                         <div class="mt-auto"><button onclick="openModal(2)" class="w-full bg-smgp-orange border-2 border-smgp-orange text-white font-bold py-3 rounded hover:bg-white hover:text-smgp-orange transition uppercase" data-i18n="btn_perf">Détails Performance</button></div>
@@ -184,42 +186,126 @@
         </div>
     </section>
 
-    <section id="demo" class="py-20 bg-gray-900 text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-smgp-orange opacity-5 rounded-full blur-3xl"></div>
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-                <div>
-                    <span class="text-smgp-orange font-bold tracking-widest text-sm uppercase" data-i18n="sec_demo_sup">Démonstration</span>
-                    <h2 class="text-3xl font-extrabold mt-2" data-i18n="sec_demo_title">OSEOKIT EN ACTION</h2>
-                </div>
-                <div class="text-right">
-                    <span class="block text-sm text-gray-400" data-i18n="sec_demo_link">Voir la vidéo complète</span>
-                    <i class="fas fa-arrow-down text-smgp-orange"></i>
-                </div>
+    <section id="comparaison" class="py-20 bg-slate-100 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="text-smgp-orange font-bold tracking-widest text-sm uppercase" data-i18n="comp_title">Comparatif</span>
+                <h2 class="text-4xl font-extrabold text-smgp-dark mt-2 uppercase" data-i18n="comp_subtitle">Le choix de l'efficacité</h2>
+                <div class="w-24 h-1 bg-smgp-orange mx-auto mt-4 rounded"></div>
             </div>
-            <div class="max-w-4xl mx-auto bg-gray-800 rounded-lg overflow-hidden shadow-2xl border border-gray-700">
-                <div class="aspect-video bg-black relative group">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/iX0A26m1dKw" title="Oseokit Pro Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="absolute inset-0 w-full h-full"></iframe>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+                <div class="md:w-1/2">
+                    <img src="comparaison.jpg" alt="1 Kit Oseokit = 8 Rouleaux de laine de verre" class="w-full rounded-xl shadow-2xl border-4 border-white" onerror="this.src='https://placehold.co/800x600?text=Photo+Comparaison+1+Kit+vs+8+Rouleaux'">
+                </div>
+                <div class="md:w-1/2 space-y-6">
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-smgp-dark shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center gap-4 mb-2">
+                            <i class="fas fa-box-open text-3xl text-smgp-orange"></i>
+                            <h4 class="text-xl font-black text-smgp-dark" data-i18n="comp_stat1">1 Kit Oeo = 8 Rouleaux</h4>
+                        </div>
+                        <p class="text-gray-600 pl-12" data-i18n="comp_desc1">Un seul kit composé de vos deux bidons de mélange équivaut au volume et à la capacité de 8 rouleaux de laine de verre traditionnels.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl border-l-4 border-smgp-dark shadow-sm hover:shadow-md transition">
+                        <div class="flex items-center gap-4 mb-2">
+                            <i class="fas fa-euro-sign text-3xl text-smgp-orange px-2"></i>
+                            <h4 class="text-xl font-black text-smgp-dark" data-i18n="comp_stat2">2x Moins Cher</h4>
+                        </div>
+                        <p class="text-gray-600 pl-12" data-i18n="comp_desc2">Réalisez des économies drastiques : le système est deux fois moins cher que de l'isolation classique en laine de verre.</p>
+                    </div>
+
+                    <div class="bg-smgp-dark p-6 rounded-xl shadow-lg text-white mt-4 border border-gray-700">
+                        <div class="flex items-center gap-4 mb-2">
+                            <i class="fas fa-tachometer-alt text-3xl text-smgp-orange"></i>
+                            <h4 class="text-xl font-black text-smgp-orange uppercase tracking-wide" data-i18n="comp_stat3">Gain d'espace, de temps et d'argent</h4>
+                        </div>
+                        <p class="text-gray-300 pl-12 text-sm" data-i18n="comp_desc3">Fini les allers-retours, la manutention lourde et le stockage contraignant. Vous optimisez la logistique de votre chantier dès le premier jour.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="parts" class="py-20 bg-slate-50 border-t border-gray-200">
+    <section id="parts" class="py-20 bg-white border-t border-gray-200 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-extrabold text-smgp-dark uppercase" data-i18n="sec_parts_title">Contenu du Kit & Consommables</h2>
-                <p class="text-gray-500 mt-2" data-i18n="sec_parts_desc">Livraison rapide en Andorre pour réassort et pièces. Cliquez pour voir les détails.</p>
+                <h2 class="text-3xl font-extrabold text-smgp-dark uppercase" data-i18n="sec_parts_title">Produits, Accessoires & EPI</h2>
+                <p class="text-gray-500 mt-2" data-i18n="sec_parts_desc">Livraison rapide en Andorre pour réapprovisionnement. Faites défiler pour voir notre catalogue.</p>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="parts-grid">
-                </div>
-            <div class="text-center mt-12">
-                <a href="#contact" class="inline-block border-b-2 border-smgp-orange text-smgp-dark font-bold hover:text-smgp-orange pb-1 transition" data-i18n="parts_link">Demander le catalogue Andorre (PDF)</a>
+            
+            <div class="relative max-w-6xl mx-auto">
+                <button onclick="scrollCarousel(-1)" class="absolute -left-4 md:-left-8 top-1/2 transform -translate-y-1/2 z-10 bg-white border border-gray-200 shadow-lg rounded-full p-4 text-smgp-dark hover:bg-smgp-orange hover:text-white transition focus:outline-none hidden md:block">
+                    <i class="fas fa-chevron-left text-xl"></i>
+                </button>
+                
+                <div id="parts-carousel" class="flex overflow-x-auto gap-6 snap-x snap-mandatory pb-8 pt-4 no-scrollbar scroll-smooth">
+                    </div>
+
+                <button onclick="scrollCarousel(1)" class="absolute -right-4 md:-right-8 top-1/2 transform -translate-y-1/2 z-10 bg-white border border-gray-200 shadow-lg rounded-full p-4 text-smgp-dark hover:bg-smgp-orange hover:text-white transition focus:outline-none hidden md:block">
+                    <i class="fas fa-chevron-right text-xl"></i>
+                </button>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="bg-smgp-dark py-20 relative overflow-hidden">
+    <section id="formation" class="py-24 bg-slate-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2 w-full relative group">
+                    <div class="absolute -inset-2 bg-smgp-orange opacity-20 rounded-2xl blur-lg group-hover:opacity-30 transition duration-500"></div>
+                    <img src="formation.jpg" alt="Centre de formation OSEOKIT Valence" class="relative w-full rounded-2xl shadow-2xl object-cover h-[500px]" onerror="this.src='https://placehold.co/800x600?text=Photo+Formation+Valence'">
+                    <div class="absolute bottom-6 left-6 bg-white/95 backdrop-blur px-5 py-3 rounded-lg font-bold text-smgp-dark shadow-xl border-l-4 border-smgp-orange">
+                        <i class="fas fa-graduation-cap text-smgp-orange mr-2"></i> Certification OSEOKIT
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 w-full">
+                    <span class="text-smgp-orange font-bold tracking-widest text-sm uppercase" data-i18n="sec_form_sup">Accompagnement</span>
+                    <h2 class="text-4xl font-extrabold text-smgp-dark mt-2 mb-6 uppercase leading-tight" data-i18n="sec_form_title">Formation Obligatoire</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed text-lg" data-i18n="sec_form_desc">Pour garantir une qualité d'isolation optimale et la sécurité sur vos chantiers, une journée de formation est indispensable avant de démarrer.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+                        <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-smgp-dark hover:border-smgp-orange transition-colors flex items-start gap-4">
+                            <i class="fas fa-map-marker-alt text-2xl text-smgp-orange mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-smgp-dark text-sm" data-i18n="form_lieu_title">Lieu</h4>
+                                <p class="text-xs text-gray-500 mt-1" data-i18n="form_lieu_desc">Centre de formation à Valence (France)</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-smgp-dark hover:border-smgp-orange transition-colors flex items-start gap-4">
+                            <i class="fas fa-clock text-2xl text-smgp-orange mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-smgp-dark text-sm" data-i18n="form_duree_title">Durée</h4>
+                                <p class="text-xs text-gray-500 mt-1" data-i18n="form_duree_desc">1 Journée complète</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-smgp-dark hover:border-smgp-orange transition-colors flex items-start gap-4">
+                            <i class="fas fa-cogs text-2xl text-smgp-orange mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-smgp-dark text-sm" data-i18n="form_prog_title">Programme</h4>
+                                <p class="text-xs text-gray-500 mt-1" data-i18n="form_prog_desc">Utilisation machine, réglages et produits</p>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl shadow-sm border-l-4 border-smgp-dark hover:border-smgp-orange transition-colors flex items-start gap-4">
+                            <i class="fas fa-spray-can text-2xl text-smgp-orange mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-smgp-dark text-sm" data-i18n="form_prat_title">Pratique</h4>
+                                <p class="text-xs text-gray-500 mt-1" data-i18n="form_prat_desc">Essais de projection en conditions réelles</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="document.getElementById('contact-subject').value='Formation'; scrollToContact();" class="w-full sm:w-auto bg-smgp-dark text-white px-8 py-4 rounded font-bold hover:bg-smgp-orange transition shadow-lg uppercase text-sm tracking-wider group inline-flex items-center justify-center">
+                        <span data-i18n="form_btn_res">Réserver ma session</span>
+                        <i class="fas fa-arrow-right ml-3 group-hover:translate-x-1 transition"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-smgp-dark py-20 relative overflow-hidden border-t border-gray-800">
         <div class="max-w-4xl mx-auto px-4 relative z-10">
             <div class="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
                 <div class="md:w-2/5 bg-gray-800 p-8 text-white flex flex-col justify-between">
@@ -245,7 +331,7 @@
                 </div>
                 <div class="md:w-3/5 p-10">
                     <h3 class="text-2xl font-bold text-smgp-dark mb-2" data-i18n="form_title">Projet en Andorre ?</h3>
-                    <p class="text-gray-500 mb-6 text-xs" data-i18n="form_sub">Devis gratuit pour le kit complet ou réassort.</p>
+                    <p class="text-gray-500 mb-6 text-xs" data-i18n="form_sub">Devis gratuit pour le kit complet ou réapprovisionnement.</p>
                     <form onsubmit="handleFormSubmit(event)">
                         <div class="mb-4">
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1" data-i18n="form_name">Société / Nom</label>
@@ -259,8 +345,9 @@
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1" data-i18n="form_interest">Intérêt</label>
                             <select id="contact-subject" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm font-bold text-smgp-dark invalid:border-red-500">
                                 <option value="Kit Complet Andorre">Kit Complet (Machine + Produits)</option>
-                                <option value="Machine Seule">Machine Evolution 001 Seule</option>
-                                <option value="Reassort Produits">Réassort Produits (A+B)</option>
+                                <option value="Machine Seule">Machine Evolution 003 Seule</option>
+                                <option value="Réapprovisionnement Produits">Réapprovisionnement Produits (A+B)</option>
+                                <option value="Accessoires et EPI">Accessoires et EPI</option>
                                 <option value="Formation">Demande de Formation</option>
                             </select>
                         </div>
@@ -271,41 +358,58 @@
         </div>
     </section>
 
-    <footer class="bg-gray-900 text-gray-600 py-8 text-xs text-center border-t border-gray-800">
-        <div class="flex justify-center items-center gap-2 mb-2"><img src="https://flagcdn.com/w20/ad.png" class="h-3 grayscale opacity-50" alt="Flag"><span>SMGP Import Andorre</span></div>
-        <p>&copy; 2024 SMGP Import. Partenaire OSEOKIT PRO - Groupe MGH.</p>
+    <footer class="bg-gray-900 text-gray-500 py-10 text-xs text-center border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-2 mb-6">
+                <img src="https://flagcdn.com/w20/ad.png" class="h-3 grayscale opacity-50" alt="Flag">
+                <span class="font-bold tracking-widest uppercase">SMGP Import Andorre</span>
+            </div>
+
+            <div class="mb-8">
+                <a href="https://www.instagram.com/smgp_canillo/" target="_blank" aria-label="Suivez-nous sur Instagram" class="instagram-link inline-flex items-center justify-center text-gray-400 hover:text-smgp-orange transition duration-300 p-2">
+                    <i class="fab fa-instagram text-3xl"></i>
+                </a>
+            </div>
+            
+            <p class="mb-2">&copy; 2026 SMGP Import. Partenaire OSEOKIT PRO - JOC distribution.</p>
+            <p class="uppercase font-bold text-gray-600" data-i18n="footer_rights">Tous droits réservés. Reproduction interdite sans autorisation.</p>
+        </div>
     </footer>
 
     <script>
         // --- 1. CONFIGURATION LANGUE ---
         const translations = {
             fr: {
-                nav_distributor: "DISTRIBUTEUR", nav_country: "ANDORRE", nav_kit: "Le Kit", nav_video: "Vidéos", nav_parts: "Pièces", nav_contact: "CONTACT",
-                hero_badge: "Distributeur Officiel • Principauté d'Andorre", hero_subtitle: "RAPIDE. EFFICACE.", hero_desc: "Isolez 25 m² en 20 minutes. Le système complet machine + isolant pour les professionnels du bâtiment.", hero_btn: "Découvrir le système",
+                nav_distributor: "DISTRIBUTEUR", nav_country: "ANDORRE", nav_kit: "LE KIT", nav_comp: "AVANTAGES", nav_parts: "PIÈCES & EPI", nav_formation: "FORMATION", nav_contact: "CONTACT",
+                hero_badge: "Distributeur Officiel • Principauté d'Andorre", hero_subtitle: "RAPIDE. EFFICACE.", hero_desc: "Isolez 25 m² en moins de 25 minutes. Le système complet machine + isolant garanti à vie pour les professionnels.", hero_btn: "Découvrir le système",
                 sec_machines_sup: "Matériel Disponible", sec_machines_title: "Un Système Complet",
                 card_machine_badge: "Machine de Projection", card_machine_sub: "Compacte & Transportable • 230 V", card_machine_desc: "Machine conçue pour être facilement transportable. Idéale pour l'utilisation mobile sur tous vos chantiers en montagne ou accès difficile.",
                 label_alim: "Alim", label_hose: "Tuyau", btn_details: "Détails Techniques",
-                card_iso_badge: "Isolant Projeté", card_iso_sub: "Isolation 3 en 1 • RE2020", card_iso_desc: "Bénéficiez d'une isolation thermique, acoustique (+70%) et d'une étanchéité à l'air haute performance. Parfait pour les normes énergétiques actuelles.",
+                card_iso_badge: "Isolant Projeté", card_iso_sub: "Isolation 3 en 1 • Garanti à vie", card_iso_desc: "Bénéficiez d'une isolation thermique, acoustique (+70%) et d'une étanchéité à l'air haute performance avec seulement 4% de matière chimique.",
                 label_speed: "Vitesse", btn_perf: "Détails Performance",
-                sec_demo_sup: "Démonstration", sec_demo_title: "OSEOKIT EN ACTION", sec_demo_link: "Voir la vidéo complète",
-                sec_parts_title: "Contenu du Kit & Consommables", sec_parts_desc: "Livraison rapide en Andorre pour réassort et pièces. Cliquez pour voir les détails.", parts_link: "Demander le catalogue Andorre (PDF)",
+                comp_title: "Comparatif", comp_subtitle: "Le choix de l'efficacité", comp_stat1: "1 Kit Oseo = 8 Rouleaux", comp_desc1: "Un seul kit composé de vos deux bidons de mélange équivaut au volume et à la capacité de 8 rouleaux de laine de verre traditionnels.", comp_stat2: "2x Moins Cher", comp_desc2: "Réalisez des économies drastiques : le système est deux fois moins cher que de l'isolation classique en laine de verre.", comp_stat3: "Gain d'espace, de temps et d'argent", comp_desc3: "Fini les allers-retours, la manutention lourde et le stockage contraignant. Vous optimisez la logistique de votre chantier dès le premier jour.",
+                sec_parts_title: "Produits, Accessoires & EPI", sec_parts_desc: "Livraison rapide en Andorre pour réapprovisionnement. Faites défiler pour voir notre catalogue.",
+                sec_form_sup: "Accompagnement", sec_form_title: "Formation Obligatoire", sec_form_desc: "Pour garantir une qualité d'isolation optimale et la sécurité sur vos chantiers, une journée de formation est indispensable avant de démarrer.",
+                form_lieu_title: "Lieu", form_lieu_desc: "Centre de formation à Valence (France)", form_duree_title: "Durée", form_duree_desc: "1 Journée complète", form_prog_title: "Programme", form_prog_desc: "Utilisation machine, réglages et produits", form_prat_title: "Pratique", form_prat_desc: "Essais de projection en conditions réelles", form_btn_res: "Réserver ma session",
                 contact_official: "Distributeur Officiel OSEOKIT", contact_fr: "En Français", contact_cat: "En Catalan", contact_zone: "Zone d'intervention",
-                form_title: "Projet en Andorre ?", form_sub: "Devis gratuit pour le kit complet ou réassort.", form_name: "Société / Nom", form_interest: "Intérêt", form_btn: "DEMANDER MON DEVIS",
-                specs_title: "Caractéristiques Clés", modal_btn: "Obtenir un devis"
+                form_title: "Projet en Andorre ?", form_sub: "Devis gratuit pour le kit complet ou réapprovisionnement.", form_name: "Société / Nom", form_interest: "Intérêt", form_btn: "DEMANDER MON DEVIS",
+                specs_title: "Caractéristiques Clés", modal_btn: "Obtenir un devis", footer_rights: "Tous droits réservés. Reproduction interdite sans autorisation."
             },
             ca: {
-                nav_distributor: "DISTRIBUÏDOR", nav_country: "ANDORRA", nav_kit: "El Kit", nav_video: "Vídeos", nav_parts: "Recanvis", nav_contact: "CONTACTE",
-                hero_badge: "Distribuïdor Oficial • Principat d'Andorra", hero_subtitle: "RÀPID. EFICAÇ.", hero_desc: "Aïlleu 25 m² en 20 minuts. El sistema complet màquina + aïllant per als professionals de la construcció.", hero_btn: "Descobreix el sistema",
+                nav_distributor: "DISTRIBUÏDOR", nav_country: "ANDORRA", nav_kit: "EL KIT", nav_comp: "AVANTATGES", nav_parts: "RECANVIS I EPI", nav_formation: "FORMACIÓ", nav_contact: "CONTACTE",
+                hero_badge: "Distribuïdor Oficial • Principat d'Andorra", hero_subtitle: "RÀPID. EFICAÇ.", hero_desc: "Aïlleu 25 m² en menys de 25 minuts. El sistema complet màquina + aïllant garantit de per vida.", hero_btn: "Descobreix el sistema",
                 sec_machines_sup: "Material Disponible", sec_machines_title: "Un Sistema Complet",
                 card_machine_badge: "Màquina de Projecció", card_machine_sub: "Compacta & Transportable • 230 V", card_machine_desc: "Màquina dissenyada per ser fàcilment transportable. Ideal per a l'ús mòbil en totes les vostres obres de muntanya o accés difícil.",
                 label_alim: "Alim", label_hose: "Mànega", btn_details: "Detalls Tècnics",
-                card_iso_badge: "Aïllant Projectat", card_iso_sub: "Aïllament 3 en 1 • RE2020", card_iso_desc: "Beneficieu-vos d'un aïllament tèrmic, acústic (+70%) i d'una estanquitat a l'aire d'alt rendiment. Perfecte per a les normes energètiques actuals.",
+                card_iso_badge: "Aïllant Projectat", card_iso_sub: "Aïllament 3 en 1 • Garantit de per vida", card_iso_desc: "Beneficieu-vos d'un aïllament tèrmic, acústic (+70%) i estanquitat a l'aire d'alt rendiment amb només un 4% de matèria química.",
                 label_speed: "Velocitat", btn_perf: "Detalls Rendiment",
-                sec_demo_sup: "Demostració", sec_demo_title: "OSEOKIT EN ACCIÓ", sec_demo_link: "Veure el vídeo complet",
-                sec_parts_title: "Contingut del Kit & Consumibles", sec_parts_desc: "Lliurament ràpid a Andorra per a reposició i peces. Feu clic per veure els detalls.", parts_link: "Demanar el catàleg Andorra (PDF)",
+                comp_title: "Comparativa", comp_subtitle: "L'elecció de l'eficàcia", comp_stat1: "1 Kit = 8 Rotlles", comp_desc1: "Un sol kit compost de dos bidons de barreja equival al volum de 8 rotlles de llana de vidre tradicionals.", comp_stat2: "2x Més Barat", comp_desc2: "Una solució econòmica: dues vegades més barat que l'aïllament en llana de vidre clàssic.", comp_stat3: "Estalvi d'espai, temps i diners", comp_desc3: "Optimitza la teva logística d'obra i redueix els teus costos d'intervenció des del primer dia.",
+                sec_parts_title: "Productes, Accessoris i EPI", sec_parts_desc: "Lliurament ràpid a Andorra per a reposició. Fes lliscar per veure el nostre catàleg.",
+                sec_form_sup: "Acompanyament", sec_form_title: "Formació Obligatòria", sec_form_desc: "Per garantir una qualitat d'aïllament òptima i la seguretat a les vostres obres, una jornada de formació és indispensable abans de començar.",
+                form_lieu_title: "Lloc", form_lieu_desc: "Centre de formació a Valence (França)", form_duree_title: "Durada", form_duree_desc: "1 Jornada completa", form_prog_title: "Programa", form_prog_desc: "Ús de la màquina, ajustos i productes", form_prat_title: "Pràctica", form_prat_desc: "Assajos de projecció en condicions reals", form_btn_res: "Reservar la meva sessió",
                 contact_official: "Distribuïdor Oficial OSEOKIT", contact_fr: "En Francès", contact_cat: "En Català", contact_zone: "Zona d'intervenció",
-                form_title: "Projecte a Andorra?", form_sub: "Pressupost gratuït per al kit complet o recanvis.", form_name: "Empresa / Nom", form_interest: "Interès", form_btn: "DEMANAR PRESSUPOST",
-                specs_title: "Característiques Clau", modal_btn: "Obtenir un pressupost"
+                form_title: "Projecte a Andorra?", form_sub: "Pressupost gratuït per al kit complet o reposició.", form_name: "Empresa / Nom", form_interest: "Interès", form_btn: "DEMANAR PRESSUPOST",
+                specs_title: "Característiques Clau", modal_btn: "Obtenir un pressupost", footer_rights: "Tots els drets reservats. Reproducció prohibida sense autorització."
             }
         };
 
@@ -315,7 +419,7 @@
             currentLang = lang;
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) el.innerText = translations[lang][key];
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
             document.getElementById('btn-fr').classList.remove('active');
             document.getElementById('btn-ca').classList.remove('active');
@@ -326,112 +430,120 @@
         const items = [
             {
                 id: 1, type: 'machine', image: "machine.jpg",
-                name: "EVOLUTION 001", tag: "MACHINE", tag_ca: "MÀQUINA", ref: "REF-EVO-001",
-                desc: "Machine de projection portable. 230V.", desc_ca: "Màquina de projecció portàtil. 230V.",
-                specs: { l1: "230V", l2: "30 M", l3: "Compacte", l3_ca: "Compacta", l4: "Mobile", l4_ca: "Mòbil" },
-                labels: ["Alim", "Tuyau", "Format", "Usage"], labels_ca: ["Alimentació", "Canonada", "Format", "Ús"]
+                name: "EVOLUTION 003", tag: "MACHINE", tag_ca: "MÀQUINA", ref: "REF-EVO-003",
+                desc: "Machine de projection portable de haute précision. Conçue spécifiquement pour l'application de l'OseoKit.", desc_ca: "Màquina de projecció portàtil d'alta precisió. Dissenyada específicament per a l'aplicació de l'OseoKit.",
+                specs: { l1: "230V", l2: "30 M", l3: "135 x 85 x 75 cm", l3_ca: "135 x 85 x 75 cm", l4: "110 Kg", l4_ca: "110 Kg" },
+                labels: ["Alimentation", "Tuyau", "Dimensions (H x L x P)", "Poids"], labels_ca: ["Alimentació", "Mànega", "Dimensions (A x A x P)", "Pes"]
             },
             {
-                // MODIFICATION ICI : Image locale
                 id: 2, type: 'isolant', image: "isolantprojete.jpg",
                 name: "OSEO TOP 10", tag: "ISOLANT", tag_ca: "AÏLLANT", ref: "REF-ISO-TOP",
-                desc: "Mousse polyuréthane 3 en 1.", desc_ca: "Escuma de poliuretà 3 en 1.",
-                specs: { l1: "A+", l2: "Immédiate", l2_ca: "Immediata", l3: "25m²", l4: "RE2020" },
-                labels: ["Air", "Etanchéité", "Rendement", "Norme"], labels_ca: ["Aire", "Estanquitat", "Rendiment", "Norma"]
+                desc: `<ul class="list-disc pl-5 space-y-2 mt-2 text-left text-sm text-gray-700">
+                    <li><b>Rendement garanti :</b> 1 kit Oseo = 25 m² pour 10 cm d'épaisseur, projeté en moins de 25 minutes.</li>
+                    <li><b>Composition :</b> Seulement 4 % de matière chimique !</li>
+                    <li><b>Durabilité exceptionnelle :</b> Isolant garanti pour toute la vie du bâtiment.</li>
+                    <li><b>Très bonne isolation thermique :</b> Excellente gestion des ponts thermiques.</li>
+                    <li><b>Isolation acoustique performante :</b> + 70 % par rapport à la réglementation en vigueur.</li>
+                    <li><b>Étanchéité à l’air :</b> Performances atteintes dès le 1er cm projeté.</li>
+                    <li><b>Empreinte carbone réduite :</b> Grâce à la fabrication de l’isolant directement sur chantier.</li>
+                    <li><b>Mise en œuvre rapide :</b> Produit stable et inerte en moins de 20 secondes.</li>
+                    <li><b>Qualité de l’air intérieur préservée :</b> Émissions de COV réduites (Classement A+).</li>
+                </ul>`, 
+                desc_ca: `<ul class="list-disc pl-5 space-y-2 mt-2 text-left text-sm text-gray-700">
+                    <li><b>Rendiment:</b> 1 kit = 25 m² per 10 cm d'espessor, projectat en < 25 minuts.</li>
+                    <li><b>Composició:</b> Només un 4% de matèria química!</li>
+                    <li><b>Durabilitat:</b> Aïllant garantit per a tota la vida de l'edifici.</li>
+                    <li><b>Tèrmica:</b> Excel·lent gestió dels ponts tèrmics.</li>
+                    <li><b>Acústica:</b> + 70 % en comparació amb la normativa.</li>
+                    <li><b>Estanquitat:</b> Assolida des del 1r cm.</li>
+                    <li><b>Ecologia:</b> Petjada de carboni reduïda (fabricació in situ).</li>
+                    <li><b>Rapidesa:</b> Producte estable en menys de 20 segons.</li>
+                    <li><b>Qualitat de l'aire:</b> Classe A+.</li>
+                </ul>`,
+                specs: { l1: "A+", l2: "Garantie à vie", l2_ca: "Garantia de per vida", l3: "25 m²", l4: "4% Chimie", l4_ca: "4% Química" },
+                labels: ["Qualité Air", "Durée", "Volume par Kit", "Composition"], labels_ca: ["Qualitat Aire", "Durada", "Volum per Kit", "Composició"]
             }
         ];
 
+        // Intégration de tous les éléments du catalogue dans le carrousel
         const parts = [
-            { 
-                id: 101, name: "Bidon Isocyanate (A)", name_ca: "Bidó Isocianat (A)", 
-                tag: "CHIMIE", tag_ca: "QUÍMICA", ref: "REF-ISO-A",
-                desc: "Composant A pour le mélange OSEOKIT. Bidon scellé.", 
-                desc_ca: "Component A per a la barreja OSEOKIT. Bidó segellat.", 
-                image: "bidon.jpg",
-                specs: { l1: "Liquide", l1_ca: "Líquid", l2: "Origine FR", l2_ca: "Origen FR" },
-                labels: ["Etat", "Fab"], labels_ca: ["Estat", "Fab"]
-            },
-            { 
-                id: 102, name: "Bidon Polyol (B)", name_ca: "Bidó Poliol (B)", 
-                tag: "CHIMIE", tag_ca: "QUÍMICA", ref: "REF-POL-B",
-                desc: "Composant B pour le mélange OSEOKIT. Bidon scellé.", 
-                desc_ca: "Component B per a la barreja OSEOKIT. Bidó segellat.", 
-                image: "bidon.jpg",
-                specs: { l1: "Liquide", l1_ca: "Líquid", l2: "Origine FR", l2_ca: "Origen FR" },
-                labels: ["Etat", "Fab"], labels_ca: ["Estat", "Fab"]
-            },
-            { 
-                id: 103, name: "Pistolet Projection", name_ca: "Pistola de Projecció", 
-                tag: "ACCESSOIRE", tag_ca: "ACCESSORI", ref: "REF-PIST-01",
-                desc: "Pistolet ergonomique pour machine Evolution 001. Léger et précis.", 
-                desc_ca: "Pistola ergonòmica per a màquina Evolution 001. Lleugera i precisa.", 
-                image: "pistolet.jpg",
-                specs: { l1: "Ergo", l1_ca: "Ergo", l2: "Précis", l2_ca: "Precís" },
-                labels: ["Type", "Atout"], labels_ca: ["Tipus", "Avantatge"]
-            },
-            { 
-                id: 104, name: "Tuyaux 30m", name_ca: "Mànegues 30m", 
-                tag: "INCLUS", tag_ca: "INCLÒS", ref: "REF-TUY-30",
-                desc: "Jeu de tuyaux chauffants de 30 mètres pour une portée maximale.", 
-                desc_ca: "Joc de mànegues calefactades de 30 metres per a un abast màxim.", 
-                image: "https://placehold.co/200x200?text=Tuyau+30m",
-                specs: { l1: "30m", l2: "Chauffant", l2_ca: "Calefactat" },
-                labels: ["Longueur", "Type"], labels_ca: ["Longitud", "Tipus"]
-            }
+            { id: 101, name: "Bidon Isocyanate (A)", tag: "CHIMIE", ref: "REF-ISO-A", desc: "Composant A pour le mélange OSEOKIT. Bidon scellé.", image: "bidon.jpg", specs: { l1: "Liquide", l2: "Origine FR" }, labels: ["Etat", "Fab"] },
+            { id: 102, name: "Bidon Polyol (B)", tag: "CHIMIE", ref: "REF-POL-B", desc: "Composant B pour le mélange OSEOKIT. Bidon scellé.", image: "bidon.jpg", specs: { l1: "Liquide", l2: "Origine FR" }, labels: ["Etat", "Fab"] },
+            { id: 103, name: "Pistolet Projection", tag: "ACCESSOIRE", ref: "REF-PIST-03", desc: "Pistolet de fusion fourni avec une chambre de mélange. Conçu pour la machine Evolution 003.", image: "pistolet.jpg", specs: { l1: "Fusion", l2: "Chambre incluse" }, labels: ["Système", "Atout"] },
+            { id: 104, name: "Tuyaux 30m", tag: "INCLUS", ref: "REF-TUY-30", desc: "Jeu de tuyaux chauffants de 30 mètres pour une portée maximale.", image: "https://placehold.co/200x200?text=Tuyaux+30m", specs: { l1: "30m", l2: "Chauffant" }, labels: ["Longueur", "Type"] },
+            { id: 105, name: "Compresseur", tag: "ACCESSOIRE", ref: "REF-COMP-01", desc: "Compresseur d'air hautes performances, parfaitement compatible avec la machine Evolution 003.", image: "https://placehold.co/200x200?text=Compresseur", specs: { l1: "Compatible Evo 003", l2: "Puissant" }, labels: ["Usage", "Atout"] },
+            { id: 106, name: "Kit Protection Ventilé Dräger", tag: "EPI", ref: "REF-DRAG-KIT", desc: "Kit complet de protection respiratoire ventilé Dräger pour une sécurité optimale lors de la projection.", image: "https://placehold.co/200x200?text=Kit+Drager", specs: { l1: "Complet", l2: "Sécurité Pro" }, labels: ["Format", "Niveau"] },
+            { id: 107, name: "Combinaison Blanche + Cagoule", tag: "EPI", ref: "REF-COMBI", desc: "Combinaison de protection blanche intégrale avec cagoule. Disponible en tailles L, XL, XXL.", image: "https://placehold.co/200x200?text=Combinaison", specs: { l1: "L, XL, XXL", l2: "Avec cagoule" }, labels: ["Tailles", "Inclus"] },
+            { id: 108, name: "Batterie Standard Dräger", tag: "ENERGIE", ref: "REF-BAT-STD", desc: "Batterie standard pour système Dräger. Offre de 4 à 8h d'autonomie selon l'utilisation.", image: "https://placehold.co/200x200?text=Batterie+Standard", specs: { l1: "4 à 8h", l2: "Standard" }, labels: ["Autonomie", "Type"] },
+            { id: 109, name: "Batterie Haute Capacité Dräger", tag: "ENERGIE", ref: "REF-BAT-HC", desc: "Batterie haute capacité pour système Dräger. Offre de 8 à 24h d'autonomie.", image: "https://placehold.co/200x200?text=Batterie+HC", specs: { l1: "8 à 24h", l2: "Haute Capacité" }, labels: ["Autonomie", "Type"] },
+            { id: 110, name: "Unité de Ventilation X-Plore 8500", tag: "EPI", ref: "REF-VENT-8500", desc: "Unité de ventilation moteur pour une assistance respiratoire constante.", image: "https://placehold.co/200x200?text=Ventilation", specs: { l1: "X-Plore 8500", l2: "Motorisée" }, labels: ["Modèle", "Système"] },
+            { id: 111, name: "Filtres & Pré-filtres", tag: "CONSOMMABLE", ref: "REF-FILTRES", desc: "Filtres combinés anti-gaz/particules, lots de 10 pré-filtres anti-poussière, filtre DC-1 anti-humidité.", image: "https://placehold.co/200x200?text=Filtres", specs: { l1: "Anti-gaz / Poussière", l2: "Anti-humidité" }, labels: ["Protection", "Option"] },
+            { id: 112, name: "Consommables & Entretien", tag: "ENTRETIEN", ref: "REF-CONS", desc: "Gants (manutention/nitrile), vaseline, lubrifiant machine, films de protection visière, lames cutter, adhésifs, sacs poubelle, etc.", image: "https://placehold.co/200x200?text=Consommables", specs: { l1: "Divers", l2: "Stock dispo" }, labels: ["Type", "Disponibilité"] },
+            { id: 113, name: "Outillage de Chantier", tag: "ACCESSOIRE", ref: "REF-OUTILS", desc: "Télémètre 50m, agrafeuse manuelle, pige de profondeur 300mm, balai, etc.", image: "https://placehold.co/200x200?text=Outillage", specs: { l1: "Pro", l2: "Mesure / Finition" }, labels: ["Gamme", "Usage"] }
         ];
 
-        // --- 3. AFFICHAGE PIECES ---
-        const partsGrid = document.getElementById('parts-grid');
+        // --- 3. AFFICHAGE CARROUSEL ---
+        const carouselContainer = document.getElementById('parts-carousel');
         parts.forEach(part => {
-            partsGrid.innerHTML += `
-                <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition clickable-card text-center group" onclick="openModal(${part.id})">
-                    <img src="${part.img || part.image}" class="w-24 h-24 mx-auto mb-3 object-contain opacity-80 group-hover:scale-110 transition">
-                    <div class="text-xs font-bold text-smgp-orange uppercase mb-1">${part.tag}</div>
-                    <div class="font-bold text-smgp-dark text-sm leading-tight">${part.name}</div>
+            // Création de cartes avec le design épuré (Titre en gras, Tag orange) de tes maquettes
+            carouselContainer.innerHTML += `
+                <div class="flex-none w-64 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 clickable-card text-center group snap-center flex flex-col justify-between" onclick="openModal(${part.id})">
+                    <div>
+                        <img src="${part.img || part.image}" class="w-32 h-32 mx-auto mb-4 object-contain opacity-80 group-hover:scale-110 transition duration-300">
+                        <div class="text-xs font-black text-smgp-orange uppercase mb-2 tracking-widest">${part.tag}</div>
+                        <div class="font-extrabold text-smgp-dark text-lg leading-tight">${part.name}</div>
+                    </div>
                 </div>
             `;
         });
+
+        function scrollCarousel(direction) {
+            const container = document.getElementById('parts-carousel');
+            const scrollAmount = 300; 
+            container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
 
         // --- 4. LOGIQUE MODAL UNIFIEE ---
         const modal = document.getElementById('product-modal');
 
         function openModal(id) {
-            // Cherche dans les items (machines) OU dans les parts
             let item = items.find(i => i.id === id);
             if (!item) item = parts.find(p => p.id === id);
             if (!item) return;
 
             document.getElementById('modal-img').src = item.image || item.img;
             
-            // Textes selon langue
             if(currentLang === 'ca') {
                 document.getElementById('modal-title').innerText = item.name_ca || item.name;
                 document.getElementById('modal-tag').innerText = item.tag_ca || item.tag;
                 document.getElementById('modal-ref').innerText = "Ref: " + item.ref;
-                document.getElementById('modal-desc').innerText = item.desc_ca || item.desc;
+                document.getElementById('modal-desc').innerHTML = item.desc_ca || item.desc;
                 
-                // Specs
                 if(item.specs && item.labels_ca) {
                     document.getElementById('modal-specs-container').classList.remove('hidden');
-                    document.getElementById('label-1').innerText = item.labels_ca[0] || "-";
+                    document.getElementById('label-1').innerText = item.labels_ca[0] || item.labels[0] || "-";
                     document.getElementById('modal-spec1').innerText = item.specs.l1_ca || item.specs.l1 || "-";
                     
-                    document.getElementById('label-2').innerText = item.labels_ca[1] || "-";
+                    document.getElementById('label-2').innerText = item.labels_ca[1] || item.labels[1] || "-";
                     document.getElementById('modal-spec2').innerText = item.specs.l2_ca || item.specs.l2 || "-";
                     
-                    // Gérer l'affichage des lignes 3 et 4 si elles existent
                     const row3 = document.getElementById('spec-row-3');
                     if (item.specs.l3) {
                         row3.classList.remove('hidden');
-                        document.getElementById('label-3').innerText = item.labels_ca[2];
+                        document.getElementById('label-3').innerText = item.labels_ca[2] || item.labels[2];
                         document.getElementById('modal-spec3').innerText = item.specs.l3_ca || item.specs.l3;
                     } else { row3.classList.add('hidden'); }
 
                     const row4 = document.getElementById('spec-row-4');
                     if (item.specs.l4) {
                         row4.classList.remove('hidden');
-                        document.getElementById('label-4').innerText = item.labels_ca[3];
-                        document.getElementById('modal-spec4').innerText = item.specs.l4_ca || item.specs.l4;
+                        // Remplace l'icône de poids par le sac pour l'isolant
+                        if(item.specs.l4 === "4% Chimie") {
+                             row4.innerHTML = `<span><i class="fas fa-weight-hanging text-smgp-orange w-6"></i> <span id="label-4">${item.labels_ca[3] || item.labels[3]}</span>:</span> <span class="font-bold" id="modal-spec4">${item.specs.l4_ca || item.specs.l4}</span>`;
+                        } else {
+                            document.getElementById('label-4').innerText = item.labels_ca[3] || item.labels[3];
+                            document.getElementById('modal-spec4').innerText = item.specs.l4_ca || item.specs.l4;
+                        }
                     } else { row4.classList.add('hidden'); }
 
                 } else {
@@ -439,11 +551,10 @@
                 }
 
             } else {
-                // FRANCAIS
                 document.getElementById('modal-title').innerText = item.name;
                 document.getElementById('modal-tag').innerText = item.tag;
                 document.getElementById('modal-ref').innerText = "Réf: " + item.ref;
-                document.getElementById('modal-desc').innerText = item.desc;
+                document.getElementById('modal-desc').innerHTML = item.desc;
 
                 if(item.specs && item.labels) {
                     document.getElementById('modal-specs-container').classList.remove('hidden');
@@ -463,15 +574,19 @@
                     const row4 = document.getElementById('spec-row-4');
                     if (item.specs.l4) {
                         row4.classList.remove('hidden');
-                        document.getElementById('label-4').innerText = item.labels[3];
-                        document.getElementById('modal-spec4').innerText = item.specs.l4;
+                        // Ajout conditionnel de l'icône de composition
+                        if(item.specs.l4 === "4% Chimie") {
+                             row4.innerHTML = `<span><i class="fas fa-flask text-smgp-orange w-6"></i> <span id="label-4">${item.labels[3]}</span>:</span> <span class="font-bold" id="modal-spec4">${item.specs.l4}</span>`;
+                        } else {
+                            document.getElementById('label-4').innerText = item.labels[3];
+                            document.getElementById('modal-spec4').innerText = item.specs.l4;
+                        }
                     } else { row4.classList.add('hidden'); }
                 } else {
                     document.getElementById('modal-specs-container').classList.add('hidden');
                 }
             }
 
-            // Pré-remplir le formulaire
             document.getElementById('contact-subject').value = item.name + (currentLang==='ca' ? " (Andorra)" : " (Andorre)");
             
             modal.classList.remove('hidden');
