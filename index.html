@@ -689,6 +689,19 @@
         // --- 5. INITIALISATION DE LA PAGE ---
         // On force la traduction en catalan dès le chargement de la page
         setLanguage('ca');
+        // --- 6. AUTO-SCROLL DU CARROUSEL ---
+        setInterval(() => {
+            const carousel = document.getElementById('parts-carousel');
+            if (carousel) {
+                // Si on a atteint la fin du carrousel (marge d'erreur de 10px), on retourne au début
+                if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+                    carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    // Sinon on avance d'un cran
+                    scrollCarousel(1);
+                }
+            }
+        }, 2000); // 2000 millisecondes = 2 secondes
     </script>
 </body>
 </html>
