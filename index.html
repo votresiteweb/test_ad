@@ -20,6 +20,16 @@
     <meta property="og:locale" content="ca_AD">
     <meta property="og:locale:alternate" content="fr_AD">
 
+     <!-- Social preview -->
+    <meta property="og:image" content="https://smgp-andorra.com/fond.jpg">
+    <meta property="og:url" content="https://smgp-andorra.com/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="fr" href="https://smgp-andorra.com/?lang=fr">
+    <link rel="alternate" hreflang="ca" href="https://smgp-andorra.com/?lang=ca">
+    <link rel="alternate" hreflang="x-default" href="https://smgp-andorra.com/">
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -400,7 +410,8 @@
                     
                     <form action="https://api.web3forms.com/submit" method="POST">
                         <input type="hidden" name="access_key" value="e43187e0-07f7-46da-9c0a-81f1c7c673e7">
-                        
+                        <input type="hidden" name="redirect" value="https://smgp-andorra.com/merci.html">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display:none">
                         <div class="mb-4">
                             <label class="block text-xs font-bold text-gray-500 uppercase mb-1" data-i18n="form_name">Société / Nom</label>
                             <input type="text" name="nom" id="contact-name" required class="w-full bg-gray-50 p-3 rounded border border-gray-200 focus:border-smgp-orange focus:outline-none text-sm">
@@ -490,14 +501,19 @@
 
         function setLanguage(lang) {
             currentLang = lang;
+
+            // Met à jour l'attribut lang de la page
+            document.documentElement.setAttribute('lang', lang === 'ca' ? 'ca' : 'fr');
+
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
+
             document.getElementById('btn-fr').classList.remove('active');
             document.getElementById('btn-ca').classList.remove('active');
             document.getElementById(`btn-${lang}`).classList.add('active');
-            
+
             // Met à jour le carrousel avec la bonne langue
             renderCarousel();
         }
@@ -567,7 +583,7 @@
             { id: 106, name: "Kit Protection Ventilé Dräger", name_ca: "Kit Protecció Ventilat Dräger", tag: "EPI", tag_ca: "EPI", ref: "REF-DRAG-KIT", desc: "Kit complet de protection respiratoire ventilé Dräger pour une sécurité optimale lors de la projection.", desc_ca: "Kit complet de protecció respiratòria ventilada Dräger per a una seguretat òptima durant la projecció.", image: "./kitprotectionventille.jpg", specs: { l1: "Complet", l1_ca: "Complet", l2: "Sécurité Pro", l2_ca: "Seguretat Pro" }, labels: ["Format", "Niveau"], labels_ca: ["Format", "Nivell"] },
             { id: 107, name: "Combinaison Blanche + Cagoule", name_ca: "Granota Blanca + Caputxa", tag: "EPI", tag_ca: "EPI", ref: "REF-COMBI", desc: "Combinaison de protection blanche intégrale avec cagoule. Disponible en tailles L, XL, XXL.", desc_ca: "Granota de protecció blanca integral amb caputxa. Disponible en talles L, XL, XXL.", image: "https://placehold.co/200x200?text=Combinaison", specs: { l1: "L, XL, XXL", l1_ca: "L, XL, XXL", l2: "Avec cagoule", l2_ca: "Amb caputxa" }, labels: ["Tailles", "Inclus"], labels_ca: ["Talles", "Inclou"] },
             { id: 108, name: "Batterie Standard Dräger", name_ca: "Bateria Estàndard Dräger", tag: "ENERGIE", tag_ca: "ENERGIA", ref: "REF-BAT-STD", desc: "Batterie standard pour système Dräger. Offre de 4 à 8h d'autonomie selon l'utilisation.", desc_ca: "Bateria estàndard per al sistema Dräger. Ofereix de 4 a 8h d'autonomia segons l'ús.", image: "./batteriestandard.jpg", specs: { l1: "4 à 8h", l1_ca: "4 a 8h", l2: "Standard", l2_ca: "Estàndard" }, labels: ["Autonomie", "Type"], labels_ca: ["Autonomia", "Tipus"] },
-            { id: 109, name: "Batterie Haute Capacité Dräger", name_ca: "Bateria Alta Capacitat Dräger", tag: "ENERGIE", tag_ca: "ENERGIA", ref: "REF-BAT-HC", desc: "Batterie haute capacitat per al sistema Dräger. Ofereix de 8 a 24h d'autonomia.", image: "batteriestandard.jpg", specs: { l1: "8 à 24h", l1_ca: "8 a 24h", l2: "Haute Capacité", l2_ca: "Alta Capacitat" }, labels: ["Autonomie", "Type"], labels_ca: ["Autonomia", "Tipus"] },
+            { id: 109,name: "Batterie Haute Capacité Dräger",name_ca: "Bateria Alta Capacitat Dräger",tag: "ENERGIE",tag_ca: "ENERGIA",ref: "REF-BAT-HC",desc: "Batterie haute capacité pour système Dräger. Offre de 8 à 24h d'autonomie.",desc_ca: "Bateria d'alta capacitat per al sistema Dräger. Ofereix de 8 a 24h d'autonomia.",image: "./batteriestandard.jpg",specs: { l1: "8 à 24h", l1_ca: "8 a 24h", l2: "Haute Capacité", l2_ca: "Alta Capacitat" },labels: ["Autonomie", "Type"],labels_ca: ["Autonomia", "Tipus"]},
             { id: 110, name: "Unité de Ventilation X-Plore 8500", name_ca: "Unitat de Ventilació X-Plore 8500", tag: "EPI", tag_ca: "EPI", ref: "REF-VENT-8500", desc: "Unité de ventilation moteur pour une assistance respiratoire constante.", desc_ca: "Unitat de ventilació motoritzada per a una assistència respiratòria constant.", image: "./unitedeventilation.jpg", specs: { l1: "X-Plore 8500", l1_ca: "X-Plore 8500", l2: "Motorisée", l2_ca: "Motoritzada" }, labels: ["Modèle", "Système"], labels_ca: ["Model", "Sistema"] },
             { id: 111, name: "Filtres & Pré-filtres", name_ca: "Filtres i Prefiltres", tag: "CONSOMMABLE", tag_ca: "CONSUMIBLE", ref: "REF-FILTRES", desc: "Filtres combinés anti-gaz/particules, lots de 10 pré-filtres anti-poussière, filtre DC-1 anti-humidité.", desc_ca: "Filtres combinats antigàs/partícules, lots de 10 prefiltres antipols, filtre DC-1 antihumitat.", image: "https://placehold.co/200x200?text=Filtres", specs: { l1: "Anti-gaz / Poussière", l1_ca: "Antigàs / Pols", l2: "Anti-humidité", l2_ca: "Antihumitat" }, labels: ["Protection", "Option"], labels_ca: ["Protecció", "Opció"] },
             { id: 112, name: "Consommables & Entretien", name_ca: "Consumibles i Manteniment", tag: "ENTRETIEN", tag_ca: "MANTENIMENT", ref: "REF-CONS", desc: "Gants (manutention/nitrile), vaseline, lubrifiant machine, films de protection visière, lames cutter, adhésifs, sacs poubelle, etc.", desc_ca: "Guants (manipulació/nitril), vaselina, lubricant de màquina, films de protecció per a visera, fulles de cúter, adhesius, bosses d'escombraries, etc.", image: "https://placehold.co/200x200?text=Consommables", specs: { l1: "Divers", l1_ca: "Diversos", l2: "Stock dispo", l2_ca: "Estoc disp." }, labels: ["Type", "Disponibilité"], labels_ca: ["Tipus", "Disponibilitat"] },
@@ -584,7 +600,7 @@
                 carouselContainer.innerHTML += `
                     <div class="flex-none w-64 bg-white p-6 rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 clickable-card text-center group snap-center flex flex-col justify-between" onclick="openModal(${part.id})">
                         <div>
-                            <img src="${part.img || part.image}" class="w-32 h-32 mx-auto mb-4 object-contain opacity-80 group-hover:scale-110 transition duration-300">
+                            <img src="${part.image}" class="w-32 h-32 mx-auto mb-4 object-contain opacity-80 group-hover:scale-110 transition duration-300" alt="${displayName}">
                             <div class="text-xs font-black text-smgp-orange uppercase mb-2 tracking-widest">${displayTag}</div>
                             <div class="font-extrabold text-smgp-dark text-lg leading-tight">${displayName}</div>
                         </div>
@@ -610,7 +626,7 @@
             if (!item) item = parts.find(p => p.id === id);
             if (!item) return;
 
-            document.getElementById('modal-img').src = item.image || item.img;
+            document.getElementById('modal-img').src = item.image;
             
             if(currentLang === 'ca') {
                 document.getElementById('modal-title').innerText = item.name_ca || item.name;
@@ -634,15 +650,24 @@
                     } else { row3.classList.add('hidden'); }
 
                     const row4 = document.getElementById('spec-row-4');
-                    if (item.specs.l4 || item.specs.l4_ca) {
+                    const icon4 = row4.querySelector('i');
+
+                    if (item.specs?.l4 || item.specs?.l4_ca) {
                         row4.classList.remove('hidden');
-                        if(item.specs.l4 === "4% Chimie") {
-                             row4.innerHTML = `<span><i class="fas fa-weight-hanging text-smgp-orange w-6"></i> <span id="label-4">${item.labels_ca[3] || item.labels[3]}</span>:</span> <span class="font-bold" id="modal-spec4">${item.specs.l4_ca || item.specs.l4}</span>`;
+
+                        const val4 = item.specs.l4_ca || item.specs.l4 || "";
+                        // Choix icon : flacon si chimie, sinon poids
+                        if (val4.toLowerCase().includes('quím') || val4.toLowerCase().includes('chim')) {
+                            icon4.className = "fas fa-flask text-smgp-orange w-6";
                         } else {
-                            document.getElementById('label-4').innerText = item.labels_ca[3] || item.labels[3];
-                            document.getElementById('modal-spec4').innerText = item.specs.l4_ca || item.specs.l4;
+                            icon4.className = "fas fa-weight-hanging text-smgp-orange w-6";
                         }
-                    } else { row4.classList.add('hidden'); }
+
+                        document.getElementById('label-4').innerText = item.labels_ca?.[3] || item.labels?.[3] || "-";
+                        document.getElementById('modal-spec4').innerText = val4 || "-";
+                    } else {
+                        row4.classList.add('hidden');
+                    }
 
                 } else {
                     document.getElementById('modal-specs-container').classList.add('hidden');
@@ -670,15 +695,23 @@
                     } else { row3.classList.add('hidden'); }
 
                     const row4 = document.getElementById('spec-row-4');
-                    if (item.specs.l4) {
+                    const icon4 = row4.querySelector('i');
+
+                    if (item.specs?.l4) {
                         row4.classList.remove('hidden');
-                        if(item.specs.l4 === "4% Chimie") {
-                             row4.innerHTML = `<span><i class="fas fa-flask text-smgp-orange w-6"></i> <span id="label-4">${item.labels[3]}</span>:</span> <span class="font-bold" id="modal-spec4">${item.specs.l4}</span>`;
+
+                        const val4 = item.specs.l4 || "";
+                        if (val4.toLowerCase().includes('chim')) {
+                            icon4.className = "fas fa-flask text-smgp-orange w-6";
                         } else {
-                            document.getElementById('label-4').innerText = item.labels[3];
-                            document.getElementById('modal-spec4').innerText = item.specs.l4;
+                            icon4.className = "fas fa-weight-hanging text-smgp-orange w-6";
                         }
-                    } else { row4.classList.add('hidden'); }
+
+                        document.getElementById('label-4').innerText = item.labels?.[3] || "-";
+                        document.getElementById('modal-spec4').innerText = val4 || "-";
+                    } else {
+                        row4.classList.add('hidden');
+                    }
                 } else {
                     document.getElementById('modal-specs-container').classList.add('hidden');
                 }
@@ -688,13 +721,14 @@
             const customSubject = (currentLang === 'ca' ? (item.name_ca || item.name) + " (Andorra)" : (item.name) + " (Andorre)");
             const subjectSelect = document.getElementById('contact-subject');
 
-            let optionExists = Array.from(subjectSelect.options).some(opt => opt.value === customSubject);
-
-            if (!optionExists) {
-                const newOption = new Option(customSubject, customSubject);
-                subjectSelect.add(newOption);
+            let customOpt = subjectSelect.querySelector('option[data-custom="1"]');
+            if (!customOpt) {
+                customOpt = document.createElement('option');
+                customOpt.setAttribute('data-custom', '1');
+                subjectSelect.add(customOpt);
             }
-
+            customOpt.value = customSubject;
+            customOpt.textContent = customSubject;
             subjectSelect.value = customSubject;
             
             modal.classList.remove('hidden');
